@@ -1,0 +1,4 @@
+repository "LethalSemei@LiL_Dos1k@cloud"
+  path "/"
+    br "/main"
+    co "/main"
