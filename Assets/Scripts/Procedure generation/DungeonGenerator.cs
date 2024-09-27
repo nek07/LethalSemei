@@ -43,6 +43,7 @@ public class DungeonGenerator : MonoBehaviour
     }
     
     [SerializeField] private Vector3 size;
+    [SerializeField] private int floors = 1;
     [SerializeField] private int maxRoomCount;
     [SerializeField] private Transform[] fireExitsPositions;
     [SerializeField] private GameObject[] roomPrefabs;
@@ -55,6 +56,7 @@ public class DungeonGenerator : MonoBehaviour
     private List<Room> rooms;
     Delaunay delaunay;
     private HashSet<Prim.Edge> selectedEdges;
+    private float roomYsize;
 
 
     private void Start()
@@ -62,7 +64,7 @@ public class DungeonGenerator : MonoBehaviour
         random = new Random();
         grid = new Grid3D<CellType>(size, Vector3.zero);
         rooms = new List<Room>();
-        
+        roomYsize = GetPrefabSize(roomPrefabs[0]).y;
         GenerateDungeon();
         
     }
@@ -72,6 +74,7 @@ public class DungeonGenerator : MonoBehaviour
         PlaceRooms();
         Triangulate();
         CreateHallways();
+        //CreateHallway2();
         PathfindHallways();
     }
 
@@ -82,7 +85,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             Vector3 location = new Vector3(
                 (float)(random.NextDouble() * size.x),
-                (float)(random.NextDouble() * size.y),
+                random.Next(0, floors + 1) * roomYsize,
                 (float)(random.NextDouble() * size.z));
 
             GameObject roomPref = roomPrefabs[random.Next(0, roomPrefabs.Length)];
@@ -99,12 +102,12 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
 
-            /*if (newRoom.bounds.min.x < 0 || newRoom.bounds.max.x >= size.x
+            if (newRoom.bounds.min.x < 0 || newRoom.bounds.max.x >= size.x
                                          || newRoom.bounds.min.y < 0 || newRoom.bounds.max.y >= size.y
                                          || newRoom.bounds.min.z < 0 || newRoom.bounds.max.z >= size.z)
             {
                 add = false;
-            }*/
+            }
 
             if (add)
             {
@@ -112,10 +115,6 @@ public class DungeonGenerator : MonoBehaviour
                 rooms.Add(newRoom);
                 PlaceRoom(newRoom.location);
                 
-                
-                
-
-
             }
             
         }
@@ -132,26 +131,25 @@ public class DungeonGenerator : MonoBehaviour
     }
     
     void CreateHallways() {
-        List<Prim.Edge> edges = new List<Prim.Edge>();
+         List<Prim.Edge> edges = new List<Prim.Edge>();
  
-        foreach (var edge in delaunay.Edges) {
-            edges.Add(new Prim.Edge(edge.U, edge.V));
-        }
+         foreach (var edge in delaunay.Edges) {
+             edges.Add(new Prim.Edge(edge.U, edge.V));
+         }
  
-        List<Prim.Edge> minimumSpanningTree = Prim.MinimumSpanningTree(edges, edges[0].U);
+         List<Prim.Edge> minimumSpanningTree = Prim.MinimumSpanningTree(edges, edges[0].U);
  
-        selectedEdges = new HashSet<Prim.Edge>(minimumSpanningTree);
-        var remainingEdges = new HashSet<Prim.Edge>(edges);
-        remainingEdges.ExceptWith(selectedEdges);
+         selectedEdges = new HashSet<Prim.Edge>(minimumSpanningTree);
+         var remainingEdges = new HashSet<Prim.Edge>(edges);
+         remainingEdges.ExceptWith(selectedEdges);
  
-        foreach (var edge in remainingEdges) {
-            if (random.NextDouble() < 0.3) {
-                selectedEdges.Add(edge);
-            }
-        }
-    }
-    
-    
+         foreach (var edge in remainingEdges) {
+             if (random.NextDouble() < 0.3) {
+                 selectedEdges.Add(edge);
+             }
+         }
+     }
+ 
      void PathfindHallways() {
          PathFinder aStar = new PathFinder(size);
  
@@ -314,6 +312,13 @@ public class DungeonGenerator : MonoBehaviour
 
 
     }
+    
+    
+    
+    
+    
+    
+    
 }
     
     
