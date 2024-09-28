@@ -1,5 +1,4 @@
 using System;
-using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,215 +18,206 @@ public class BunkerGenerator : MonoBehaviour
     private List<GenLevelPart> generatedRooms;
     private bool isGenerated = false;
 
-   /* private void Awake()
+    private void Start()
     {
-        Instance = this;
-    }*/
+        generatedRooms = new List<GenLevelPart>();
+        StartGeneration();
+    }
 
-   private void Start()
-   {
-       generatedRooms = new List<GenLevelPart>();
-       StartGeneration();
-   }
+    public void StartGeneration()
+    {
+        Debug.Log("Starting generation...");
+        Generate();
+        //GenerateAlternateEntrances();
+        isGenerated = true;
+        Debug.Log("Generation finished.");
+    }
 
-   public void StartGeneration()
-   {
-       Generate();
-       GenerateAlternateEntrances();
-       isGenerated = true;
-   }
+    private void Generate()
+    {
+        for (int i = 0; i < maxCountRooms - alternateEntrances.Count; i++)
+        {
+            Debug.Log($"Generating room {i + 1}/{maxCountRooms}...");
+            if (generatedRooms.Count < 1)
+            {
+                GameObject generatedRoom = Instantiate(entrance, transform.position, transform.rotation);
+                Debug.Log("Entrance room generated.");
 
-   private void Generate()
-   {
-       for (int i = 0; i < maxCountRooms - alternateEntrances.Count; i++)
-       {
-           if (generatedRooms.Count < 1)
-           {
-               GameObject generatedRoom = Instantiate(entrance, transform.position, transform.rotation);
-               
-               generatedRoom.transform.SetParent(null);
-               if (generatedRoom.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
-               {
-                  // genLevelPart.GetNetworkObject().Spawn(true);
-                   generatedRooms.Add(genLevelPart);
-               }
-           }
-           else
-           {
-               bool isPlaceHallway = Random.Range(0f, 1f) > 0.5f;
-               GenLevelPart randomRoom = null;
-               Transform roomEntrypoint = null;
-               int totalRetries = 100;
-               int retryIndex = 0;
+                generatedRoom.transform.SetParent(null);
+                if (generatedRoom.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
+                {
+                    generatedRooms.Add(genLevelPart);
+                    Debug.Log("Entrance room added to the generated rooms list.");
+                }
+            }
+            else
+            {
+                bool isPlaceHallway = Random.Range(0f, 1f) > 0.5f;
+                Debug.Log($"Placing {(isPlaceHallway ? "hallway" : "room")}...");
 
-               while (randomRoom == null && retryIndex < totalRetries)
-               {
-                   int randomLinkRoomIndex = Random.Range(0, generatedRooms.Count);
-                   GenLevelPart testRoom = generatedRooms[randomLinkRoomIndex];
-                   if (testRoom.HasAvailableEntrypoint(out roomEntrypoint))
-                   {
-                       randomRoom = testRoom;
-                       break;
-                   }
+                GenLevelPart randomRoom = null;
+                Transform roomEntrypoint = null;
+                int totalRetries = 100;
+                int retryIndex = 0;
 
-                   retryIndex++;
-               }
+                while (randomRoom == null && retryIndex < totalRetries)
+                {
+                    int randomLinkRoomIndex = Random.Range(0, generatedRooms.Count);
+                    GenLevelPart testRoom = generatedRooms[randomLinkRoomIndex];
+                    if (testRoom.HasAvailableEntrypoint(out roomEntrypoint))
+                    {
+                        randomRoom = testRoom;
+                        Debug.Log("Found available entry point in a generated room.");
+                        break;
+                    }
 
-               GameObject doorToAlign = Instantiate(door, transform.position, transform.rotation);
-               //doorToAlign.GetComponent<NetworkObject>().Spawn(true);
+                    retryIndex++;
+                    if (retryIndex == totalRetries)
+                    {
+                        Debug.LogWarning("Failed to find available entry point after maximum retries.");
+                    }
+                }
 
-               if (isPlaceHallway)
-               {
-                   int randomIndex = Random.Range(0, hallways.Count);
-                   GameObject generatedHallway = Instantiate(hallways[randomIndex], transform.position, transform.rotation);
-                   generatedHallway.transform.SetParent(null);
-                   if (generatedHallway.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
-                   {
-                       //genLevelPart.GetNetworkObject().Spawn(true);
-                       if (genLevelPart.HasAvailableEntrypoint(out Transform room2Entrypoint))
-                       {
-                           generatedRooms.Add(genLevelPart);
-                           doorToAlign.transform.position = roomEntrypoint.transform.position;
-                           doorToAlign.transform.rotation = roomEntrypoint.transform.rotation;
-                           AlignRooms(randomRoom.transform, generatedHallway.transform, roomEntrypoint,
-                               room2Entrypoint);
-                           if (HandleIntersection(genLevelPart))
-                           {
-                               genLevelPart.UnuseEntrypoint(roomEntrypoint);
-                               randomRoom.UnuseEntrypoint(roomEntrypoint);
-                               RetryPlacement(generatedHallway, doorToAlign);
-                               continue;
-                           }
-                           
-                       }
-                   }
-               }
-               else
-               {
-                   GameObject generatedRoom;
+                GameObject doorToAlign = Instantiate(door, transform.position, transform.rotation);
+                Debug.Log("Door instantiated.");
 
-                   if (specialRooms.Count > 0)
-                   {
-                       bool isPlaceSpecialRoom = Random.Range(0f, 1f) > 0.9f;
-                       if (isPlaceSpecialRoom)
-                       {
-                           int randomIndex = Random.Range(0, specialRooms.Count);
-                           generatedRoom = Instantiate(specialRooms[randomIndex], transform.position,
-                               transform.rotation);
+                if (isPlaceHallway)
+                {
+                    int randomIndex = Random.Range(0, hallways.Count);
+                    GameObject generatedHallway = Instantiate(hallways[randomIndex], transform.position, transform.rotation);
+                    Debug.Log($"Hallway {randomIndex} generated.");
 
-                       }
-                       else
-                       {
-                           int randomIndex = Random.Range(0, rooms.Count);
-                           generatedRoom = Instantiate(rooms[randomIndex], transform.position, transform.rotation);
-                       }
-                   }
-                   else
-                   {
-                       int randomIndex = Random.Range(0, rooms.Count);
-                       generatedRoom = Instantiate(rooms[randomIndex], transform.position, transform.rotation);
-                   }
-                   generatedRoom.transform.SetParent(null);
+                    generatedHallway.transform.SetParent(null);
+                    if (generatedHallway.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
+                    {
+                        if (genLevelPart.HasAvailableEntrypoint(out Transform room2Entrypoint))
+                        {
+                            generatedRooms.Add(genLevelPart);
+                            AlignRooms(randomRoom.transform, generatedHallway.transform, roomEntrypoint, room2Entrypoint);
 
-                   if (generatedRoom.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
-                   {
-                       //genLevelPart.GetNetworkObject().Spawn(true);
-                       if (genLevelPart.HasAvailableEntrypoint(out Transform room2Entrypoint))
-                       {
-                           generatedRooms.Add(genLevelPart);
-                           doorToAlign.transform.position = roomEntrypoint.transform.position;
-                           doorToAlign.transform.rotation = roomEntrypoint.transform.rotation;
-                           AlignRooms(randomRoom.transform, generatedRoom.transform, roomEntrypoint, room2Entrypoint);
+                            if (HandleIntersection(genLevelPart))
+                            {
+                                Debug.LogWarning("Intersection detected, retrying hallway placement...");
+                                genLevelPart.UnuseEntrypoint(room2Entrypoint);
+                                randomRoom.UnuseEntrypoint(roomEntrypoint);
+                                RetryPlacement(generatedHallway, doorToAlign);
+                                continue;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    GameObject generatedRoom;
 
-                           if (HandleIntersection(genLevelPart))
-                           {
-                               genLevelPart.UnuseEntrypoint(room2Entrypoint);
-                               randomRoom.UnuseEntrypoint(roomEntrypoint);
-                               RetryPlacement(generatedRoom, doorToAlign);
-                               continue;
-                           }
-                       }
-                   }
-               }
-           }
-       }
-   }
+                    if (specialRooms.Count > 0)
+                    {
+                        bool isPlaceSpecialRoom = Random.Range(0f, 1f) > 0.9f;
+                        int randomIndex = isPlaceSpecialRoom
+                            ? Random.Range(0, specialRooms.Count)
+                            : Random.Range(0, rooms.Count);
 
-   private void GenerateAlternateEntrances()
-   {
-       
-   }
+                        generatedRoom = Instantiate(isPlaceSpecialRoom ? specialRooms[randomIndex] : rooms[randomIndex],
+                            transform.position, transform.rotation);
 
-   private void FillEmptyEntrances()
-   {
-       generatedRooms.ForEach(room => room.FillEmptyDoors());
-   }
+                        Debug.Log($"{(isPlaceSpecialRoom ? "Special room" : "Regular room")} generated.");
+                    }
+                    else
+                    {
+                        int randomIndex = Random.Range(0, rooms.Count);
+                        generatedRoom = Instantiate(rooms[randomIndex], transform.position, transform.rotation);
+                        Debug.Log($"Room {randomIndex} generated.");
+                    }
 
-   private void AlignRooms(Transform room1, Transform room2, Transform room1Entry, Transform room2Entry)
-   {
-       float angle = Vector3.Angle(room1Entry.forward, room2Entry.forward);
-       room2.TransformPoint(room2Entry.position);
-       room2.eulerAngles = new Vector3(room2.eulerAngles.x, room2.eulerAngles.y, room2.eulerAngles.z);
+                    generatedRoom.transform.SetParent(null);
 
-       Vector3 offset = room1Entry.position - room2Entry.position;
+                    if (generatedRoom.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
+                    {
+                        if (genLevelPart.HasAvailableEntrypoint(out Transform room2Entrypoint))
+                        {
+                            generatedRooms.Add(genLevelPart);
+                            AlignRooms(randomRoom.transform, generatedRoom.transform, roomEntrypoint, room2Entrypoint);
 
-       room2.position += offset;
-       Physics.SyncTransforms();
-   }
+                            if (HandleIntersection(genLevelPart))
+                            {
+                                Debug.LogWarning("Intersection detected, retrying room placement...");
+                                genLevelPart.UnuseEntrypoint(room2Entrypoint);
+                                randomRoom.UnuseEntrypoint(roomEntrypoint);
+                                RetryPlacement(generatedRoom, doorToAlign);
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-   private bool HandleIntersection(GenLevelPart genLevelPart)
-   {
-       bool didIntersect = false;
-       Collider[] hits = Physics.OverlapBox(genLevelPart.collider.bounds.center, genLevelPart.collider.bounds.size / 2,
-           Quaternion.identity, roomsLayerMask);
-       foreach (Collider hit in hits)
-       {
-           if (hit == genLevelPart.collider) continue;
-           if (hit != genLevelPart.collider)
-           {
-               didIntersect = true;
-               break;
-           }
-       }
+    private void AlignRooms(Transform room1, Transform room2, Transform room1Entry, Transform room2Entry)
+    {
+        Debug.Log("Aligning rooms...");
+        float angle = Vector3.Angle(room1Entry.forward, room2Entry.forward);
+        room2.TransformPoint(room2Entry.position);
+        room2.eulerAngles = new Vector3(room2.eulerAngles.x, room2.eulerAngles.y, room2.eulerAngles.z);
 
-       return didIntersect;
-   }
+        Vector3 offset = room1Entry.position - room2Entry.position;
+        room2.position += offset;
+        Physics.SyncTransforms();
+        Debug.Log("Rooms aligned.");
+    }
 
-   private void RetryPlacement(GameObject itemPlace, GameObject doorToPlace)
-   {
-       GenLevelPart randomGeneratedRoom = null;
-       Transform room1Entrypoint = null;
-       int totalRetries = 100;
-       int retryIndex = 0;
+    private bool HandleIntersection(GenLevelPart genLevelPart)
+    {
+        Collider[] hits = Physics.OverlapBox(genLevelPart.collider.bounds.center, genLevelPart.collider.bounds.size / 2,
+            Quaternion.identity, roomsLayerMask);
+        foreach (Collider hit in hits)
+        {
+            if (hit != genLevelPart.collider)
+            {
+                Debug.LogWarning($"Intersection detected with {hit.gameObject.name}.");
+                return true;
+            }
+        }
 
-       while (randomGeneratedRoom == null && retryIndex < totalRetries)
-       {
-           int randomLinkRoomIndex = Random.Range(0, generatedRooms.Count - 1);
-           GenLevelPart testRoom = generatedRooms[randomLinkRoomIndex];
-           if (testRoom.HasAvailableEntrypoint(out room1Entrypoint))
-           {
-               randomGeneratedRoom = testRoom;
-               break;
-           }
+        return false;
+    }
 
-           retryIndex++;
-       }
+    private void RetryPlacement(GameObject itemPlace, GameObject doorToPlace)
+    {
+        Debug.Log("Retrying placement...");
+        GenLevelPart randomGeneratedRoom = null;
+        Transform room1Entrypoint = null;
+        int totalRetries = 100;
+        int retryIndex = 0;
 
-       if (itemPlace.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
-       {
-           if (genLevelPart.HasAvailableEntrypoint(out Transform room2Entrypoint))
-           {
-               doorToPlace.transform.position = room1Entrypoint.transform.position;
-               doorToPlace.transform.rotation = room1Entrypoint.transform.rotation;
+        while (randomGeneratedRoom == null && retryIndex < totalRetries)
+        {
+            int randomLinkRoomIndex = Random.Range(0, generatedRooms.Count - 1);
+            GenLevelPart testRoom = generatedRooms[randomLinkRoomIndex];
+            if (testRoom.HasAvailableEntrypoint(out room1Entrypoint))
+            {
+                randomGeneratedRoom = testRoom;
+                Debug.Log("Found available entry point in a generated room for retry.");
+                break;
+            }
+
+            retryIndex++;
+        }
+
+        if (itemPlace.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
+        {
+            if (genLevelPart.HasAvailableEntrypoint(out Transform room2Entrypoint))
+            {
                 AlignRooms(randomGeneratedRoom.transform, itemPlace.transform, room1Entrypoint, room2Entrypoint);
 
                 if (HandleIntersection(genLevelPart))
                 {
+                    Debug.LogWarning("Intersection detected during retry, retrying again...");
                     genLevelPart.UnuseEntrypoint(room2Entrypoint);
                     randomGeneratedRoom.UnuseEntrypoint(room1Entrypoint);
                     RetryPlacement(itemPlace, doorToPlace);
                 }
-           }
-       }
-   }
+            }
+        }
+    }
 }
