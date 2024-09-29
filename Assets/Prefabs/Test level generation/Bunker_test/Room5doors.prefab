@@ -105,7 +105,7 @@ MonoBehaviour:
   roomsLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  partType: 1
+  partType: 0
   fillerWall: {fileID: 3541862929913638734, guid: 511bc39fca2f03c4e91f2f2117aec7a6,
     type: 3}
   entrypoints:

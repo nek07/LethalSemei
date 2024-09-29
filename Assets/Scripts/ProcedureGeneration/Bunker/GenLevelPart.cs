@@ -98,7 +98,15 @@ public class GenLevelPart : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.magenta;
+        if (partType == PartType.Room)
+        {
+            Gizmos.color = Color.magenta;
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+        }
+        
         Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
     }
 
