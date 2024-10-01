@@ -16,6 +16,10 @@ TagManager:
   - Wood (Static)
   - Dirt (Static)
   - Wood
+  - Footsteps/GRASS
+  - Footsteps/METAL
+  - Footsteps/WOOD
+  - Footsteps/DIRT
   layers:
   - Default
   - TransparentFX
