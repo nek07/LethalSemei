@@ -264,7 +264,6 @@ public class FirstPersonController : MonoBehaviour
                         footStepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
                         break;
                     default:
-                        footStepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
                         break;
                 }
             }
