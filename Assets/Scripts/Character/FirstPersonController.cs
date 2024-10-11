@@ -260,8 +260,7 @@ public class FirstPersonController : MonoBehaviour
                     case "Footsteps/DIRT":
                         footStepAudioSource.PlayOneShot(dirtClips[Random.Range(0, dirtClips.Length - 1)]);
                         break;
-                    case "Footsteps/GRASS":
-                        footStepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                    case "Footsteps/GRASS": footStepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
                         break;
                     default:
                         break;
