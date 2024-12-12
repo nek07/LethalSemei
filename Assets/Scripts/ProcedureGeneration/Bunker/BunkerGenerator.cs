@@ -31,6 +31,8 @@ public class BunkerGenerator : MonoBehaviour
         //GenerateAlternateEntrances();
         isGenerated = true;
         Debug.Log("Generation finished.");
+        gameObject.SetActive(false);
+        
     }
 
     private void Generate()
@@ -78,8 +80,8 @@ public class BunkerGenerator : MonoBehaviour
                     }
                 }
 
-                GameObject doorToAlign = Instantiate(door, transform.position, transform.rotation);
-                Debug.Log("Door instantiated.");
+                // doorToAlign = Instantiate(door, transform.position, transform.rotation);
+                //Debug.Log("Door instantiated.");
 
                 if (isPlaceHallway)
                 {
@@ -100,7 +102,7 @@ public class BunkerGenerator : MonoBehaviour
                                 Debug.LogWarning("Intersection detected, retrying hallway placement...");
                                 genLevelPart.UnuseEntrypoint(room2Entrypoint);
                                 randomRoom.UnuseEntrypoint(roomEntrypoint);
-                                RetryPlacement(generatedHallway, doorToAlign);
+                                RetryPlacement(generatedHallway);
                                 continue;
                             }
                         }
@@ -143,7 +145,7 @@ public class BunkerGenerator : MonoBehaviour
                                 Debug.LogWarning("Intersection detected, retrying room placement...");
                                 genLevelPart.UnuseEntrypoint(room2Entrypoint);
                                 randomRoom.UnuseEntrypoint(roomEntrypoint);
-                                RetryPlacement(generatedRoom, doorToAlign);
+                                RetryPlacement(generatedRoom);
                                 continue;
                             }
                         }
@@ -182,9 +184,20 @@ public class BunkerGenerator : MonoBehaviour
         return false;
     }
 
-    private void RetryPlacement(GameObject itemPlace, GameObject doorToPlace)
+    private int retryAttempts = 0;
+    private const int maxRetryAttempts = 10;
+
+    private void RetryPlacement(GameObject itemPlace)
     {
-        Debug.Log("Retrying placement...");
+        if (retryAttempts >= maxRetryAttempts)
+        {
+            Debug.LogWarning("Maximum retry attempts reached. Stopping further retries to prevent infinite loop.");
+            return;
+        }
+
+        retryAttempts++;
+        Debug.Log($"Retrying placement... Attempt {retryAttempts}/{maxRetryAttempts}");
+
         GenLevelPart randomGeneratedRoom = null;
         Transform room1Entrypoint = null;
         int totalRetries = 100;
@@ -215,9 +228,11 @@ public class BunkerGenerator : MonoBehaviour
                     Debug.LogWarning("Intersection detected during retry, retrying again...");
                     genLevelPart.UnuseEntrypoint(room2Entrypoint);
                     randomGeneratedRoom.UnuseEntrypoint(room1Entrypoint);
-                    RetryPlacement(itemPlace, doorToPlace);
+                    RetryPlacement(itemPlace);
                 }
             }
         }
+
+        retryAttempts = 0; // Сбросить счетчик после завершения
     }
 }

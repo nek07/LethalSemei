@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
@@ -10,7 +11,10 @@ public class FirstPersonController : MonoBehaviour
     private bool ShouldCrouch =>
         Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && characterController.isGrounded;
 
-
+    
+    public Vector2 PlayerInput { get; private set; } = Vector2.zero;
+    private PlayerState playerState;
+    
     [Header("Options")] 
     [SerializeField] private bool canSprint = true;
     [SerializeField] private bool canJump = true;
@@ -32,6 +36,7 @@ public class FirstPersonController : MonoBehaviour
 
 
     [Header("Look Parameters")] 
+    [SerializeField] public CinemachineVirtualCamera playerCamera;
     [SerializeField, Range(0, 10)] private float lookSpeedX = 2.0f;
     [SerializeField, Range(0, 10)] private float lookSpeedY = 2.0f;
     [SerializeField, Range(1, 180)] private float upperLookLimit = 80.0f;
@@ -61,6 +66,11 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float crouchBobAmount = 0.025f;
     private float defaultYPos = 0;
     private float timer;
+    
+    [Header("Recoil Param")]
+    private Vector3 targetRecoil = Vector3.zero;
+    private Vector3 currentRecoil = Vector3.zero;
+
 
     [Header("Footstep Param")] 
     [SerializeField] private float baseStepSpeed = 0.5f;
@@ -101,7 +111,7 @@ public class FirstPersonController : MonoBehaviour
     }
     
 
-    private Camera playerCamera;
+    
     private CharacterController characterController;
 
     private Vector3 moveDirection;
@@ -111,11 +121,12 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
-        playerCamera = GetComponentInChildren<Camera>();
+        //playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerState = GetComponent<PlayerState>();
     }
 
     private void Update()
@@ -137,6 +148,7 @@ public class FirstPersonController : MonoBehaviour
             if (useFootsteps)
                 HandleFootsteps();
             
+            UpdateMovementState();
             ApplyFinalMovements();
             
            // if (characterController.velocity.y <  -1 && characterController.isGrounded)
@@ -151,13 +163,14 @@ public class FirstPersonController : MonoBehaviour
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) +
                         (transform.TransformDirection(Vector3.right) * currentInput.y);
         moveDirection.y = moveDirectionY;
+        PlayerInput = currentInput;
     }
 
     private void HandleMouseLook()
     {
         rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
         rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX,0,0);
+        playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(rotationX + currentRecoil.y, currentRecoil.x, 0), Time.deltaTime * 50);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
     }
 
@@ -170,6 +183,8 @@ public class FirstPersonController : MonoBehaviour
             moveDirection += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
         
         characterController.Move(moveDirection * Time.deltaTime);
+
+        
     }
 
     private void HandleJump()
@@ -269,5 +284,52 @@ public class FirstPersonController : MonoBehaviour
 
             footstepTimer = GetCurrentOffset;
         }
+    }
+
+    private void UpdateMovementState()
+    {
+        PlayerMovementState lateralState = IsMovingLaterally() || (PlayerInput !=
+            Vector2.zero) ? PlayerMovementState.Running : PlayerMovementState.Idling;
+        if (!characterController.isGrounded && characterController.velocity.y > 0f)
+        {
+            lateralState = PlayerMovementState.Jumping;
+        }
+        else if (!characterController.isGrounded && characterController.velocity.y <= 0f)
+        {
+            lateralState = PlayerMovementState.Falling;
+        }
+        else if (isCrouching)
+        {
+            lateralState = PlayerMovementState.Crouching;
+        }else if (IsSprinting)
+        {
+            lateralState = PlayerMovementState.Sprinting;
+        }
+        playerState.SetState(lateralState);
+        
+        
+    }
+
+    private bool IsMovingLaterally()
+    {
+        Vector3 lateralVelocity = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
+        return lateralVelocity.magnitude > 0.01f;
+    }
+
+    public void ApllyRecoil(GunData gunData)
+    {
+        float recoilX = Random.Range(-gunData.a_maxRecoil.x, gunData.a_maxRecoil.x) * gunData.a_recoilAmount;
+        float recoilY = Random.Range(-gunData.a_maxRecoil.y, gunData.a_maxRecoil.y) * gunData.a_recoilAmount;
+
+        targetRecoil += new Vector3(recoilX, recoilY, 0);
+
+        currentRecoil = Vector3.MoveTowards(currentRecoil, targetRecoil, Time.deltaTime * gunData.a_recoilSpeed);
+    }
+
+    public void ResetRecoil(GunData gunData)
+    {
+        currentRecoil = Vector3.MoveTowards(currentRecoil, Vector3.zero, Time.deltaTime * gunData.a_resetRecoilSpeed);
+        targetRecoil = Vector3.MoveTowards(targetRecoil, Vector3.zero, Time.deltaTime * gunData.a_resetRecoilSpeed);
+
     }
 }
