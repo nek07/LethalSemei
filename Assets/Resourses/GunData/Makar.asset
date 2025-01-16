@@ -12,20 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2764a971b97194eb3b16f62b1011ed, type: 3}
   m_Name: Makar
   m_EditorClassIdentifier: 
-  gunName: 
+  gunName: Makar
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 1089
+    m_Bits: 1
   shootingRange: 100
   fireRate: 4
   magazineSize: 100
   reloadTime: 2
   inventory: 100
-  a_recoilAmount: 10
-  a_maxRecoil: {x: 2, y: 3}
-  a_recoilSpeed: 500
-  a_resetRecoilSpeed: 50
-  d_recoilAmount: 100
+  a_recoilAmount: 1
+  a_maxRecoil: {x: 2, y: 1}
+  a_recoilSpeed: 30
+  a_resetRecoilSpeed: 1
+  d_recoilAmount: 0.23
   d_maxRecoil: {x: 1, y: 2}
-  d_recoilSpeed: 2
+  d_recoilSpeed: 10
   d_resetRecoilSpeed: 1
+  bulletTrailPrefab: {fileID: 8842417517809362613, guid: 1eac13bcfb23cbf498f6cce67091fb48,
+    type: 3}
+  bulletSpeed: 100

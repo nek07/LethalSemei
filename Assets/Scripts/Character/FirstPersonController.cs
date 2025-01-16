@@ -1,48 +1,50 @@
+using System;
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FirstPersonController : MonoBehaviour
 {
     public bool canMove = true;
     private bool IsSprinting => canSprint && Input.GetKey(sprintKey);
-    private bool ShouldJump =>  Input.GetKeyDown(jumpKey) && characterController.isGrounded;
+    private bool ShouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
 
     private bool ShouldCrouch =>
         Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && characterController.isGrounded;
 
-    
     public Vector2 PlayerInput { get; private set; } = Vector2.zero;
     private PlayerState playerState;
-    
-    [Header("Options")] 
-    [SerializeField] private bool canSprint = true;
+
+    [Header("Options")] [SerializeField] private bool canSprint = true;
     [SerializeField] private bool canJump = true;
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool canUseHeadBob = true;
     [SerializeField] private bool willSlideOnSlopes = true;
     [SerializeField] private bool useFootsteps = true;
-    
-    [Header("Controls")] 
-    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
+
+    [Header("Controls")] [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
-    [Header("Movement Parameters")] 
-    [SerializeField] private float walkSpeed = 3.0f;
+    [Header("Movement Parameters")] [SerializeField]
+    private float walkSpeed = 3.0f;
+
     [SerializeField] private float sprintSpeed = 6.0f;
     [SerializeField] private float crouchSpeed = 1.5f;
     [SerializeField] private float slopeSpeed = 8f;
 
 
-    [Header("Look Parameters")] 
-    [SerializeField] public CinemachineVirtualCamera playerCamera;
+    [Header("Look Parameters")] [SerializeField]
+    public CinemachineVirtualCamera playerCamera;
+
     [SerializeField, Range(0, 10)] private float lookSpeedX = 2.0f;
     [SerializeField, Range(0, 10)] private float lookSpeedY = 2.0f;
     [SerializeField, Range(1, 180)] private float upperLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float lowerLookLimit = 80.0f;
+    [SerializeField] private Transform headTransform;
 
-    [Header("Jumping Param")] 
+[Header("Jumping Param")] 
     [SerializeField, Range(3f, 20f)] private float jumpForce = 8.0f;
     [SerializeField, Range(1f, 100f)] private float gravity = 23.0f;
     [SerializeField, Range(0f, 0.5f)] private float coyoteTime = 0.2f;
@@ -96,7 +98,6 @@ public class FirstPersonController : MonoBehaviour
     {
         get
         {
-            Debug.DrawRay(transform.position, Vector3.down, Color.red);
             if (characterController.isGrounded &&
                 Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2f))
             {
@@ -156,6 +157,8 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    
+
     private void HandleMovementInput()
     {
         currentInput = new Vector2((isCrouching? crouchSpeed: IsSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical"), (isCrouching? crouchSpeed: IsSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
@@ -209,20 +212,33 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleCrouch()
     {
-        if (ShouldCrouch)
-            StartCoroutine(CrouchStand());
+        if (Input.GetKey(crouchKey) && characterController.isGrounded)
+        {
+            if (!isCrouching)
+                SetCrouchState(true);
+        }
+        else if (isCrouching || IsSprinting || !characterController.isGrounded)
+        {
+            SetCrouchState(false);
+        }
     }
-
-    private IEnumerator CrouchStand()
+    private void SetCrouchState(bool crouch)
     {
-        if(isCrouching && Physics.Raycast(playerCamera.transform.position, Vector3.up, 1f))
-            yield break;
+        if (isCrouching == crouch || duringCrouchAnimation)
+            return;
+
+        StartCoroutine(CrouchAnimation(crouch));
+    }
+    private IEnumerator CrouchAnimation(bool crouch)
+    {
         duringCrouchAnimation = true;
-        float timeElapsed = 0;
-        float targetHeight = isCrouching ? standingHeight : crouchHeight;
+        float timeElapsed = 0f;
+
+        float targetHeight = crouch ? crouchHeight : standingHeight;
         float currentHeight = characterController.height;
-        Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
+        Vector3 targetCenter = crouch ? crouchingCenter : standingCenter;
         Vector3 currentCenter = characterController.center;
+
         while (timeElapsed < timeToCrouch)
         {
             characterController.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
@@ -233,8 +249,7 @@ public class FirstPersonController : MonoBehaviour
 
         characterController.height = targetHeight;
         characterController.center = targetCenter;
-        isCrouching = !isCrouching;
-        
+        isCrouching = crouch;
         duringCrouchAnimation = false;
     }
 
@@ -303,7 +318,7 @@ public class FirstPersonController : MonoBehaviour
             lateralState = PlayerMovementState.Crouching;
         }else if (IsSprinting)
         {
-            lateralState = PlayerMovementState.Sprinting;
+            lateralState = PlayerMovementState.Running;
         }
         playerState.SetState(lateralState);
         
@@ -315,7 +330,7 @@ public class FirstPersonController : MonoBehaviour
         Vector3 lateralVelocity = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
         return lateralVelocity.magnitude > 0.01f;
     }
-
+    
     public void ApllyRecoil(GunData gunData)
     {
         float recoilX = Random.Range(-gunData.a_maxRecoil.x, gunData.a_maxRecoil.x) * gunData.a_recoilAmount;
@@ -332,4 +347,6 @@ public class FirstPersonController : MonoBehaviour
         targetRecoil = Vector3.MoveTowards(targetRecoil, Vector3.zero, Time.deltaTime * gunData.a_resetRecoilSpeed);
 
     }
+    
+    
 }

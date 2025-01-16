@@ -28,4 +28,8 @@ public class GunData : ScriptableObject
     public Vector2 d_maxRecoil;
     public float d_recoilSpeed;
     public float d_resetRecoilSpeed;
+
+    [Header("VFX")] 
+    public GameObject bulletTrailPrefab;
+    public float bulletSpeed;
 }
