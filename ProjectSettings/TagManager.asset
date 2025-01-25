@@ -20,6 +20,7 @@ TagManager:
   - Footsteps/METAL
   - Footsteps/WOOD
   - Footsteps/DIRT
+  - Building
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - Post Processing Scope
   - Invisible Wall
   - Projectile
-  - 
+  - Terrain
   - 
   - 
   - 

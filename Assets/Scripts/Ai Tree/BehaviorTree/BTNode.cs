@@ -1,7 +1,5 @@
-﻿namespace Ai_Tree
-{
-    public class BTNode
+﻿
+    public abstract class BTNode
     {
-        
+        public abstract bool Evaluate();
     }
-}
