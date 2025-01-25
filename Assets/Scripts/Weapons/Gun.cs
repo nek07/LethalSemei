@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using ItemSystem;
 using UnityEngine;
 
 public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
+    public Transform gunMuzzle;
+    public GameObject bulletHolePrefab;
+    public GameObject bulletParticlePrefab;
+
     [HideInInspector] public FirstPersonController playerController;
     [HideInInspector] public Transform camerTransform;
 
@@ -12,8 +17,8 @@ public abstract class Gun : MonoBehaviour
     private float nextTimeToFire = 0f;
     private float inventory = 0f;
     
-    private Vector3 targetRecoil = Vector3.zero;
-    [HideInInspector] public Vector3 currentRecoil = Vector3.zero;
+    private Vector3 d_targetRecoil = Vector3.zero;
+    [HideInInspector] public Vector3 d_currentRecoil = Vector3.zero;
 
     private bool isReloading = false;
 
@@ -100,15 +105,15 @@ public abstract class Gun : MonoBehaviour
         float recoilX = Random.Range(-gunData.d_maxRecoil.x, gunData.d_maxRecoil.x) * gunData.d_recoilAmount;
         float recoilY = Random.Range(-gunData.d_maxRecoil.y, gunData.d_maxRecoil.y) * gunData.d_recoilAmount;
 
-        targetRecoil += new Vector3(recoilX, recoilY, 0);
+        d_targetRecoil += new Vector3(recoilX, recoilY, 0);
 
-        currentRecoil = Vector3.MoveTowards(currentRecoil, targetRecoil, Time.deltaTime * gunData.d_recoilSpeed);
+        d_currentRecoil = d_targetRecoil;
     }
 
     private void ResetDirectionalRecoil()
     {
-        currentRecoil = Vector3.MoveTowards(currentRecoil, Vector3.zero, Time.deltaTime * gunData.d_resetRecoilSpeed);
-        targetRecoil = Vector3.MoveTowards(targetRecoil, Vector3.zero, Time.deltaTime * gunData.d_resetRecoilSpeed);
+        d_currentRecoil = Vector3.MoveTowards(d_currentRecoil, Vector3.zero, Time.deltaTime * gunData.d_resetRecoilSpeed);
+        d_targetRecoil = Vector3.MoveTowards(d_targetRecoil, Vector3.zero, Time.deltaTime * gunData.d_resetRecoilSpeed);
 
     }
 }

@@ -39,7 +39,7 @@ public class CharacterAnimController : MonoBehaviour
         bool isJumping = playerState.CurrentPlayerMovementState == PlayerMovementState.Jumping;
         bool isFalling = playerState.CurrentPlayerMovementState == PlayerMovementState.Falling;
         bool isGrounded = characterController.isGrounded;
-        
+        bool isSprinting = playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
         
         Vector2 inputTarget = firstPersonController.PlayerInput;
         currentBlendInput = Vector3.Lerp(currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
@@ -47,6 +47,7 @@ public class CharacterAnimController : MonoBehaviour
         animator.SetBool(isCrouchHash, isCrouching);
         animator.SetBool(isFallingHash, isFalling);
         animator.SetBool(isRunningHash, isRunning);
+        //animator.SetBool(isRunningHash, isSprinting);
         //animator.SetBool(, isGrounded);
         animator.SetBool(isJumpingHash, isJumping);
         animator.SetFloat(inputXhash, currentBlendInput.x);
