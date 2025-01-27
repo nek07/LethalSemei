@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ItemSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -70,52 +71,103 @@ public class PlayerInventory : MonoBehaviour
 
     private void UpdateSelectedSlot()
     {
-        if(currentItem < 0 || currentItem >= inventorySlots.Count) return;
-        if(currentItem == slotIndex) return; //already active
-
-        if (currentItemObject != null)
+        // Проверяем валидность текущего элемента
+        if (currentItem < 0 || currentItem >= inventorySlots.Count)
         {
-            Destroy(currentItemObject);
-        }
-        
-        slotIndex = currentItem;
-        InventorySlot slot = inventorySlots[slotIndex];
-        Debug.Log(slotIndex);
-        if (slot.item == null)
-        {
-            Debug.Log("Slot is empty");
+            Debug.LogWarning("Current item index out of bounds.");
             return;
         }
 
-        currentItemObject = Instantiate(slot.item.prefab, itemHolder.position, itemHolder.rotation);
-        currentItemObject.transform.SetParent(itemHolder);
-        currentItemObject.transform.localPosition = slot.item.itemSO.itemPositionOffset;
-        
-        Debug.Log("Предмет переключен на: " + slot.item.itemSO.itemName);
+        // Если слот не изменился, ничего не делаем
+        if (currentItem == slotIndex) return;
 
-    }
-    private void AddItem(Item item)
-    {
-        foreach (var slot in inventorySlots)
+        // Деактивируем предыдущий активный слот (если есть)
+        if (slotIndex >= 0 && slotIndex < inventorySlots.Count)
         {
+            InventorySlot previousSlot = inventorySlots[slotIndex];
+            if (previousSlot != null && previousSlot.item != null)
+            {
+                previousSlot.DeactivateSlot();
+                Debug.Log("Previous slot deactivated: " + slotIndex);
+            }
+        }
+
+        // Обновляем текущий индекс
+        slotIndex = currentItem;
+
+        // Получаем текущий слот
+        InventorySlot slot = inventorySlots[slotIndex];
+
+        // Проверяем, есть ли предмет в слоте
+        if (slot == null || slot.item == null)
+        {
+            Debug.Log("Slot is empty or invalid: " + slotIndex);
+            return;
+        }
+
+        // Активируем новый слот
+        slot.ActivateSlot();
+        Debug.Log("Предмет переключен на: " + slot.item.itemSO.itemName);
+    }
+    private bool AddItem(Item item)
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            var slot = inventorySlots[i];
             if (slot.item == null)
             {
                 Debug.Log("Slot is empty and aaaaaaaaa");
-                slot.SetItem(item);
+                GameObject newItem = Instantiate(item.prefab, itemHolder.position, itemHolder.rotation);
+                newItem.transform.SetParent(itemHolder);
+                newItem.transform.localPosition = item.itemSO.itemPositionOffset;
+
+                if (i != currentItem)
+                {
+                    newItem.SetActive(false);
+                }
+                slot.SetSlot(newItem);
                 Debug.Log(item.itemSO.itemName + " added to Inventory");
-                return;
+                return true;
             }
         }
         Debug.Log("Инвентарь полный!!!!!");
+        return false;
     }
 
     private void RemoveItem(int slotIndex)
     {
-        if (slotIndex >= 0 && slotIndex < inventorySlots.Count)
+        // Проверяем, что индекс слота находится в допустимых границах
+        if (slotIndex < 0 || slotIndex >= inventorySlots.Count)
         {
-            inventorySlots[slotIndex].ClearSlot();
+            Debug.LogWarning("Invalid slot index: " + slotIndex);
+            return;
         }
+
+        InventorySlot slot = inventorySlots[slotIndex];
+
+        // Проверяем, есть ли предмет в слоте
+        if (slot.item == null)
+        {
+            Debug.Log("Slot is empty: " + slotIndex);
+            return;
+        }
+
+        
+        // Открепляем объект от родительского контейнера
+        GameObject itemGameObject = slot.item.GameObject();
+        if (itemGameObject != null)
+        {
+            itemGameObject.name = slot.item.itemSO.itemName;
+            itemGameObject.transform.SetParent(null);
+        }
+        slot.item.OnDropItem();
+
+        // Очищаем слот
+        slot.ClearSlot();
+
+        Debug.Log("Item removed from slot: " + slotIndex);
     }
+
 
     private void PickUpItem()
     {
@@ -126,7 +178,8 @@ public class PlayerInventory : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out IPickable pickableItem))
             {
-                AddItem(pickableItem.GetItem());
+                if(!AddItem(pickableItem.GetItem()))
+                    return;
                 Debug.Log(pickableItem.GetItem().itemSO.itemName + " test added to Inventory");
                 pickableItem.OnPickItem();
                 Debug.Log(pickableItem.GetItem().itemSO.itemName + " after onPickItem");
