@@ -42,7 +42,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(0, 10)] private float lookSpeedY = 2.0f;
     [SerializeField, Range(1, 180)] private float upperLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float lowerLookLimit = 80.0f;
-    [SerializeField] private Transform headTransform;
+    [SerializeField] private Transform headTarget;
 
 [Header("Jumping Param")] 
     [SerializeField, Range(3f, 20f)] private float jumpForce = 8.0f;
@@ -159,6 +159,7 @@ public class FirstPersonController : MonoBehaviour
 
     
 
+
     private void HandleMovementInput()
     {
         currentInput = new Vector2((isCrouching? crouchSpeed: IsSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical"), (isCrouching? crouchSpeed: IsSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
@@ -173,7 +174,8 @@ public class FirstPersonController : MonoBehaviour
     {
         rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
         rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
-        playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(rotationX + currentRecoil.y, currentRecoil.x, 0), Time.deltaTime * 50);
+        headTarget.localPosition = Vector3.Slerp(headTarget.localPosition, new Vector3(0, rotationX / -15, 1.5f), Time.deltaTime * 50);
+        playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(rotationX + currentRecoil.y, 0, 0), Time.deltaTime * 50);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
     }
 

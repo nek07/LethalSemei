@@ -13,7 +13,6 @@ public class PlayerInventory : MonoBehaviour
     private int slotIndex = 0;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform itemHolder;
-    private GameObject currentItemObject = null; 
     
     [Space(10)]
     [Header("Keys")]
