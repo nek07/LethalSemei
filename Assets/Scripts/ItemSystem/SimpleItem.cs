@@ -9,12 +9,7 @@ public class SimpleItem : Item
     {
     }
 
-    public void OnPickItem()
-    {
-        Debug.Log("SimpleItem.OnPickItem");
-        //Destroy(gameObject);
-        
-    }
+    
 
     public Item GetItem()
     {

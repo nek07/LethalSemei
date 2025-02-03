@@ -6,6 +6,7 @@ namespace ItemSystem
     {
         public ItemSO itemSO;
         public GameObject prefab;
+        public Rigidbody rb;
 
         public Item(ItemSO itemSO, GameObject prefab)
         {
@@ -22,7 +23,20 @@ namespace ItemSystem
         public void OnPickItem()
         {
             Debug.Log("SimpleItem.OnPickItem");
-            //Destroy(gameObject);
+            Destroy(gameObject);
+        }
+
+        public void AfterPickItem()
+        {
+            rb.isKinematic = true;
+        }
+
+        public void OnDropItem()
+        {
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+            }
         }
     }
 }

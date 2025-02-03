@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kettle
   m_EditorClassIdentifier: 
   itemID: ketleeras
-  itemSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  itemSprite: {fileID: 21300000, guid: f2b6b7c02a3f667499e16330d83aa88b, type: 3}
   itemName: Kettle
   itemPrefab: {fileID: 742065065763267602, guid: b23395b42797c794e90396aa62882ad4,
     type: 3}
