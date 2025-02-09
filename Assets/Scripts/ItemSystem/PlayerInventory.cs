@@ -110,27 +110,48 @@ public class PlayerInventory : MonoBehaviour
     }
     private bool AddItem(Item item)
     {
+        // Проверяем сначала текущий выбранный слот
+        var currentSlot = inventorySlots[currentItem];
+        if (currentSlot.item == null)
+        {
+            Debug.Log("Current slot is empty");
+            return AddItemToSlot(currentItem, item);
+        }
+
+        // Если текущий слот занят, проверяем остальные слоты
         for (int i = 0; i < inventorySlots.Count; i++)
         {
+            if (i == currentItem) continue; // Пропускаем уже проверенный слот
+
             var slot = inventorySlots[i];
             if (slot.item == null)
             {
-                Debug.Log("Slot is empty and aaaaaaaaa");
-                GameObject newItem = Instantiate(item.prefab, itemHolder.position, itemHolder.rotation);
-                newItem.transform.SetParent(itemHolder);
-                newItem.transform.localPosition = item.itemSO.itemPositionOffset;
-
-                if (i != currentItem)
-                {
-                    newItem.SetActive(false);
-                }
-                slot.SetSlot(newItem);
-                Debug.Log(item.itemSO.itemName + " added to Inventory");
-                return true;
+                Debug.Log("Slot is empty");
+                return AddItemToSlot(i, item);
             }
         }
+
         Debug.Log("Инвентарь полный!!!!!");
         return false;
+    }
+
+// Функция для добавления предмета в конкретный слот
+    private bool AddItemToSlot(int slotIndex, Item item)
+    {
+        var slot = inventorySlots[slotIndex];
+
+        GameObject newItem = Instantiate(item.prefab, itemHolder.position, itemHolder.rotation);
+        newItem.transform.SetParent(itemHolder);
+        newItem.transform.localPosition = item.itemSO.itemPositionOffset;
+
+        if (slotIndex != currentItem)
+        {
+            newItem.SetActive(false);
+        }
+
+        slot.SetSlot(newItem, slotIndex == currentItem);
+        Debug.Log(item.itemSO.itemName + " added to Inventory");
+        return true;
     }
 
     private void RemoveItem(int slotIndex)

@@ -1,20 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using ItemSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Image itemIcon;
-    public Text itemName;
+    [SerializeField]public Image itemIcon;
+    [SerializeField]private TextMeshProUGUI itemName;
+    [SerializeField]private Image slotBorder;
     private Sprite itemSprite;
+    
     public Item item;
     public GameObject slotGameObject;
-    
 
-    public void SetSlot(GameObject slotGameObject)
+    public void SetSlot(GameObject slotGameObject, bool isActive)
     {
         this.slotGameObject = slotGameObject;
         if (slotGameObject != null)
@@ -22,21 +21,28 @@ public class InventorySlot : MonoBehaviour
             item = slotGameObject.GetComponent<Item>();
             item.rb.isKinematic = true;
         }
-            
+
         itemSprite = item.itemSO.itemSprite;
         itemIcon.sprite = itemSprite;
+        itemIcon.enabled = true;
         
-        //itemName.text = item.name;
-        itemIcon.enabled = itemIcon.sprite != null;
+        itemIcon.color = Color.white;   // ✅ Иконка предмет
+        if (isActive)
+        {
+            slotBorder.color = Color.white;
+            itemName.text = item.itemSO.itemName;
+        }
+        
         Debug.Log(item.itemSO.itemName + " in Invetory slot");
     }
 
     public void ActivateSlot()
-    {
+    {  
+        itemName.text = item.itemSO.itemName;
+        slotBorder.color = Color.white;
         if (slotGameObject != null)
         {
             slotGameObject.SetActive(true);
-            itemIcon.color = Color.white;
         }
         else
         {
@@ -46,9 +52,11 @@ public class InventorySlot : MonoBehaviour
 
     public void DeactivateSlot()
     {
+        itemName.text = "";
         if (slotGameObject != null)
         {
             slotGameObject.SetActive(false);
+            slotBorder.color = Color.black;
             itemIcon.color = new Color(51, 51, 51, 255);
         }
         else
@@ -61,7 +69,9 @@ public class InventorySlot : MonoBehaviour
         slotGameObject = null;
         itemSprite = null;
         itemIcon.sprite = itemSprite;
-        itemIcon.enabled = itemIcon.sprite != null;
+        itemIcon.enabled = false;
+        itemName.text = "";
+        slotBorder.color = Color.black;
         item = null;
     }
     

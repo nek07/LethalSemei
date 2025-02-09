@@ -160,7 +160,7 @@ public class BunkerGenerator : MonoBehaviour
         Debug.Log("Aligning rooms...");
         float angle = Vector3.Angle(room1Entry.forward, room2Entry.forward);
         room2.TransformPoint(room2Entry.position);
-        room2.eulerAngles = new Vector3(room2.eulerAngles.x, room2.eulerAngles.y, room2.eulerAngles.z);
+        room2.eulerAngles = new Vector3(room2.eulerAngles.x, room2.eulerAngles.y + angle, room2.eulerAngles.z);
 
         Vector3 offset = room1Entry.position - room2Entry.position;
         room2.position += offset;
