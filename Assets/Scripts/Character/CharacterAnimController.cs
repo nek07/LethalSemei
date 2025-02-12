@@ -50,6 +50,11 @@ public class CharacterAnimController : MonoBehaviour
         //animator.SetBool(isRunningHash, isSprinting);
         //animator.SetBool(, isGrounded);
         animator.SetBool(isJumpingHash, isJumping);
+
+        if (!isSprinting && isRunning)
+        {
+            animator.SetFloat(inputXhash, currentBlendInput.x * 0.5f);
+        }
         animator.SetFloat(inputXhash, currentBlendInput.x);
         animator.SetFloat(inputYhash, currentBlendInput.y);
         
