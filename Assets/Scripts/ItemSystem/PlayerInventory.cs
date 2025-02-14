@@ -12,7 +12,9 @@ public class PlayerInventory : MonoBehaviour
     public int currentItem = 0;
     private int slotIndex = 0;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private CharacterAnimController animController;
     [SerializeField] private Transform itemHolder;
+    [SerializeField] private GameObject rightHand;
     
     [Space(10)]
     [Header("Keys")]
@@ -115,6 +117,7 @@ public class PlayerInventory : MonoBehaviour
         if (currentSlot.item == null)
         {
             Debug.Log("Current slot is empty");
+            item.SetCharacterAnimController(animController);
             return AddItemToSlot(currentItem, item);
         }
 
@@ -127,6 +130,7 @@ public class PlayerInventory : MonoBehaviour
             if (slot.item == null)
             {
                 Debug.Log("Slot is empty");
+                item.SetCharacterAnimController(animController);
                 return AddItemToSlot(i, item);
             }
         }
@@ -140,16 +144,23 @@ public class PlayerInventory : MonoBehaviour
     {
         var slot = inventorySlots[slotIndex];
 
-        GameObject newItem = Instantiate(item.prefab, itemHolder.position, itemHolder.rotation);
-        newItem.transform.SetParent(itemHolder);
-        newItem.transform.localPosition = item.itemSO.itemPositionOffset;
+        if (item.itemSO.type == ItemType.Melee)
+        {
+            item.gameObject.transform.SetParent(rightHand.transform);
+        }
+        else
+        {
+            item.gameObject.transform.SetParent(itemHolder);
+        }
+        item.gameObject.transform.localPosition = item.itemSO.itemPositionOffset;
+        item.gameObject.transform.localRotation = item.itemSO.itemRotationOffset;
 
         if (slotIndex != currentItem)
         {
-            newItem.SetActive(false);
+            item.gameObject.SetActive(false);
         }
 
-        slot.SetSlot(newItem, slotIndex == currentItem);
+        slot.SetSlot(item.gameObject, slotIndex == currentItem);
         Debug.Log(item.itemSO.itemName + " added to Inventory");
         return true;
     }
@@ -214,3 +225,4 @@ public interface IPickable
     Item GetItem();
     void OnPickItem();
 }
+

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ItemSystem
 {
@@ -7,6 +8,7 @@ namespace ItemSystem
         public ItemSO itemSO;
         public GameObject prefab;
         public Rigidbody rb;
+        protected CharacterAnimController characterAnimController;
 
         public Item(ItemSO itemSO, GameObject prefab)
         {
@@ -14,7 +16,10 @@ namespace ItemSystem
             this.prefab = prefab;
         }
 
-
+        public void SetCharacterAnimController(CharacterAnimController characterAnimController)
+        {
+            this.characterAnimController = characterAnimController;
+        }
         public Item GetItem()
         {
             return this;
@@ -22,14 +27,20 @@ namespace ItemSystem
 
         public void OnPickItem()
         {
-            Debug.Log("SimpleItem.OnPickItem");
-            Destroy(gameObject);
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
         }
 
-        public void AfterPickItem()
+        public virtual void SetActive(bool state)
         {
-            rb.isKinematic = true;
+            if (!state)
+            {
+                characterAnimController = null;
+            }
         }
+        
 
         public void OnDropItem()
         {
@@ -38,5 +49,7 @@ namespace ItemSystem
                 rb.isKinematic = false;
             }
         }
+
+        public virtual void Update(){}
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     [field: SerializeField] public PlayerMovementState CurrentPlayerMovementState { get; private set; } = PlayerMovementState.Idling;
+    
+
 
     public void SetState(PlayerMovementState state)
     {
@@ -23,3 +25,4 @@ public enum PlayerMovementState
     Crouching = 6,
     
 }
+

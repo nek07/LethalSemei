@@ -39,10 +39,12 @@ public class InventorySlot : MonoBehaviour
     public void ActivateSlot()
     {  
         itemName.text = item.itemSO.itemName;
+        
         slotBorder.color = Color.white;
         if (slotGameObject != null)
         {
             slotGameObject.SetActive(true);
+            item.SetActive(true);
         }
         else
         {
@@ -53,6 +55,7 @@ public class InventorySlot : MonoBehaviour
     public void DeactivateSlot()
     {
         itemName.text = "";
+        item.SetActive(false);
         if (slotGameObject != null)
         {
             slotGameObject.SetActive(false);

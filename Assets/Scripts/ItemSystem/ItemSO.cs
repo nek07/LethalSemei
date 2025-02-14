@@ -8,7 +8,15 @@ public class ItemSO : ScriptableObject
     [Header("Properties")] 
     public Sprite itemSprite;
     public string itemName;
-    public GameObject itemPrefab;
     public Vector3 itemPositionOffset;
+    public Quaternion itemRotationOffset;
+    public ItemType type;
+}
+
+public enum ItemType
+{
+    Melee,
+    Simple,
+    Gun
 }
 
