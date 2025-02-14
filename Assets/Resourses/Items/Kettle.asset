@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b15ae0bc089ae4594afec101e68731, type: 3}
   m_Name: Kettle
   m_EditorClassIdentifier: 
-  itemID: ketleeras
   itemSprite: {fileID: 21300000, guid: f2b6b7c02a3f667499e16330d83aa88b, type: 3}
   itemName: Kettle
-  itemPrefab: {fileID: 742065065763267602, guid: b23395b42797c794e90396aa62882ad4,
-    type: 3}
-  itemPositionOffset: {x: 0.21, y: -0.12, z: 0.34}
+  itemPositionOffset: {x: -0.114, y: 0.005, z: -0.129}
+  itemRotationOffset: {x: 0.38606265, y: 0.3933908, z: 0.55375344, w: 0.6241445}
+  type: 1
