@@ -6,14 +6,14 @@ namespace ItemSystem
     public class Item : MonoBehaviour, IPickable
     {
         public ItemSO itemSO;
-        public GameObject prefab;
         public Rigidbody rb;
-        protected CharacterAnimController characterAnimController;
+        public CharacterAnimController characterAnimController;
 
-        public Item(ItemSO itemSO, GameObject prefab)
+        public Item(ItemSO itemSO, Rigidbody rb, CharacterAnimController characterAnimController)
         {
             this.itemSO = itemSO;
-            this.prefab = prefab;
+            this.rb = rb;
+            this.characterAnimController = characterAnimController;
         }
 
         public void SetCharacterAnimController(CharacterAnimController characterAnimController)
@@ -35,10 +35,7 @@ namespace ItemSystem
 
         public virtual void SetActive(bool state)
         {
-            if (!state)
-            {
-                characterAnimController = null;
-            }
+            
         }
         
 
@@ -48,6 +45,7 @@ namespace ItemSystem
             {
                 rb.isKinematic = false;
             }
+            characterAnimController = null;
         }
 
         public virtual void Update(){}

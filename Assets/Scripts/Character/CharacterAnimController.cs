@@ -69,6 +69,11 @@ public class CharacterAnimController : MonoBehaviour
     {
         animator.SetTrigger(trigger.ToString());
     }
+
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
     
     public enum PlayerTrigger
     {

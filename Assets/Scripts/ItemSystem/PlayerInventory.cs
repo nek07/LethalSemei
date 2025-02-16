@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ItemSystem;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -117,7 +118,7 @@ public class PlayerInventory : MonoBehaviour
         if (currentSlot.item == null)
         {
             Debug.Log("Current slot is empty");
-            item.SetCharacterAnimController(animController);
+            
             return AddItemToSlot(currentItem, item);
         }
 
@@ -130,7 +131,6 @@ public class PlayerInventory : MonoBehaviour
             if (slot.item == null)
             {
                 Debug.Log("Slot is empty");
-                item.SetCharacterAnimController(animController);
                 return AddItemToSlot(i, item);
             }
         }
@@ -142,8 +142,11 @@ public class PlayerInventory : MonoBehaviour
 // Функция для добавления предмета в конкретный слот
     private bool AddItemToSlot(int slotIndex, Item item)
     {
+        item.SetCharacterAnimController(animController);
+        
+        Debug.Log("Character Anim " + item.characterAnimController.name);
         var slot = inventorySlots[slotIndex];
-
+        
         if (item.itemSO.type == ItemType.Melee)
         {
             item.gameObject.transform.SetParent(rightHand.transform);
@@ -161,7 +164,6 @@ public class PlayerInventory : MonoBehaviour
         }
 
         slot.SetSlot(item.gameObject, slotIndex == currentItem);
-        Debug.Log(item.itemSO.itemName + " added to Inventory");
         return true;
     }
 
@@ -170,7 +172,6 @@ public class PlayerInventory : MonoBehaviour
         // Проверяем, что индекс слота находится в допустимых границах
         if (slotIndex < 0 || slotIndex >= inventorySlots.Count)
         {
-            Debug.LogWarning("Invalid slot index: " + slotIndex);
             return;
         }
 
@@ -179,7 +180,6 @@ public class PlayerInventory : MonoBehaviour
         // Проверяем, есть ли предмет в слоте
         if (slot.item == null)
         {
-            Debug.Log("Slot is empty: " + slotIndex);
             return;
         }
 
@@ -195,8 +195,7 @@ public class PlayerInventory : MonoBehaviour
 
         // Очищаем слот
         slot.ClearSlot();
-
-        Debug.Log("Item removed from slot: " + slotIndex);
+        
     }
 
 
@@ -211,9 +210,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if(!AddItem(pickableItem.GetItem()))
                     return;
-                Debug.Log(pickableItem.GetItem().itemSO.itemName + " test added to Inventory");
                 pickableItem.OnPickItem();
-                Debug.Log(pickableItem.GetItem().itemSO.itemName + " after onPickItem");
             }
         }
     }

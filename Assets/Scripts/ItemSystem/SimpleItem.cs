@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SimpleItem : Item
 {
-    public SimpleItem(ItemSO itemSo, GameObject prefab) : base(itemSo, prefab)
+    public SimpleItem(ItemSO itemSo, Rigidbody rb, CharacterAnimController anim) : base(itemSo,rb, anim)
     {
     }
 

@@ -9,27 +9,30 @@ public class MeleeWeapon : Item
 {
     private float timePassed = 0f;
     private float clipLength = 0f;
-    private float clipSpeed = 0f;
-    private bool attack;
+    private Animator animator;
     private bool active = false;
-    private KeyCode attackKeyCode = KeyCode.L;
+    private KeyCode attackKeyCode = KeyCode.Mouse0;
+    private bool alreadyAttacked;
     
 
-    public MeleeWeapon(ItemSO itemSO, GameObject prefab, bool active) : base(itemSO, prefab)
+    public MeleeWeapon(ItemSO itemSO, bool active, Rigidbody rb, CharacterAnimController anim) : base(itemSO, rb, anim)
     {
         this.active = active;
     }
 
-    public override void SetActive(bool active)
+    public override void SetActive(bool state)
     {
         base.SetActive(active);
+        
         Debug.Log("Active AXE: " + active);
         Debug.Log("Status: " + gameObject.activeSelf);
 
-        this.active = active;
+        active = state;
         if (active)
         {
             characterAnimController.SetTriggers(CharacterAnimController.PlayerTrigger.DrawSword);
+            animator = characterAnimController.GetAnimator();
+            alreadyAttacked = false;
         }
         else
         {
@@ -41,17 +44,25 @@ public class MeleeWeapon : Item
     public override void Update()
     {
         base.Update();
-        Debug.Log("UPDate update");
+        Debug.Log("UPDate update " + active);
         if (!active)
         {
             return;
         }
 
-        if (Input.GetKeyDown(attackKeyCode))
+        HandleAttack();
+    }
+
+    private void HandleAttack()
+    {
+        timePassed += Time.deltaTime;
+        clipLength = animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
+        if ((timePassed >= 1 && Input.GetMouseButtonDown(0)) || (!alreadyAttacked && Input.GetMouseButtonDown(0)))
         {
             Debug.Log("ATAKA");
             characterAnimController.SetTriggers(CharacterAnimController.PlayerTrigger.AttackSword);
-            attack = true;
+            timePassed = 0;
+            alreadyAttacked = true;
         }
     }
 
