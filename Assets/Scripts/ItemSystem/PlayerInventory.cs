@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ItemSystem;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -12,7 +13,9 @@ public class PlayerInventory : MonoBehaviour
     public int currentItem = 0;
     private int slotIndex = 0;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private CharacterAnimController animController;
     [SerializeField] private Transform itemHolder;
+    [SerializeField] private GameObject rightHand;
     
     [Space(10)]
     [Header("Keys")]
@@ -110,27 +113,58 @@ public class PlayerInventory : MonoBehaviour
     }
     private bool AddItem(Item item)
     {
+        // Проверяем сначала текущий выбранный слот
+        var currentSlot = inventorySlots[currentItem];
+        if (currentSlot.item == null)
+        {
+            Debug.Log("Current slot is empty");
+            
+            return AddItemToSlot(currentItem, item);
+        }
+
+        // Если текущий слот занят, проверяем остальные слоты
         for (int i = 0; i < inventorySlots.Count; i++)
         {
+            if (i == currentItem) continue; // Пропускаем уже проверенный слот
+
             var slot = inventorySlots[i];
             if (slot.item == null)
             {
-                Debug.Log("Slot is empty and aaaaaaaaa");
-                GameObject newItem = Instantiate(item.prefab, itemHolder.position, itemHolder.rotation);
-                newItem.transform.SetParent(itemHolder);
-                newItem.transform.localPosition = item.itemSO.itemPositionOffset;
-
-                if (i != currentItem)
-                {
-                    newItem.SetActive(false);
-                }
-                slot.SetSlot(newItem);
-                Debug.Log(item.itemSO.itemName + " added to Inventory");
-                return true;
+                Debug.Log("Slot is empty");
+                return AddItemToSlot(i, item);
             }
         }
+
         Debug.Log("Инвентарь полный!!!!!");
         return false;
+    }
+
+// Функция для добавления предмета в конкретный слот
+    private bool AddItemToSlot(int slotIndex, Item item)
+    {
+        item.SetCharacterAnimController(animController);
+        
+        Debug.Log("Character Anim " + item.characterAnimController.name);
+        var slot = inventorySlots[slotIndex];
+        
+        if (item.itemSO.type == ItemType.Melee)
+        {
+            item.gameObject.transform.SetParent(rightHand.transform);
+        }
+        else
+        {
+            item.gameObject.transform.SetParent(itemHolder);
+        }
+        item.gameObject.transform.localPosition = item.itemSO.itemPositionOffset;
+        item.gameObject.transform.localRotation = item.itemSO.itemRotationOffset;
+
+        if (slotIndex != currentItem)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        slot.SetSlot(item.gameObject, slotIndex == currentItem);
+        return true;
     }
 
     private void RemoveItem(int slotIndex)
@@ -138,7 +172,6 @@ public class PlayerInventory : MonoBehaviour
         // Проверяем, что индекс слота находится в допустимых границах
         if (slotIndex < 0 || slotIndex >= inventorySlots.Count)
         {
-            Debug.LogWarning("Invalid slot index: " + slotIndex);
             return;
         }
 
@@ -147,7 +180,6 @@ public class PlayerInventory : MonoBehaviour
         // Проверяем, есть ли предмет в слоте
         if (slot.item == null)
         {
-            Debug.Log("Slot is empty: " + slotIndex);
             return;
         }
 
@@ -163,8 +195,7 @@ public class PlayerInventory : MonoBehaviour
 
         // Очищаем слот
         slot.ClearSlot();
-
-        Debug.Log("Item removed from slot: " + slotIndex);
+        
     }
 
 
@@ -179,9 +210,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if(!AddItem(pickableItem.GetItem()))
                     return;
-                Debug.Log(pickableItem.GetItem().itemSO.itemName + " test added to Inventory");
                 pickableItem.OnPickItem();
-                Debug.Log(pickableItem.GetItem().itemSO.itemName + " after onPickItem");
             }
         }
     }
@@ -193,3 +222,4 @@ public interface IPickable
     Item GetItem();
     void OnPickItem();
 }
+

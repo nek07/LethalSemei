@@ -16,6 +16,11 @@ public class CharacterAnimController : MonoBehaviour
     private static int isFallingHash = Animator.StringToHash("IsFalling");
     private static int isJumpingHash = Animator.StringToHash("IsJumping");
     private static int isRunningHash = Animator.StringToHash("IsRunning");
+    
+    //private static int drawSwordHash = Animator.StringToHash("DrawSword");
+    //private static int sheathSwordHash = Animator.StringToHash("SheathSword");
+    //private static int attackSword = Animator.StringToHash("AttackSword");
+
 
     
     private Vector3 currentBlendInput = Vector3.zero;
@@ -50,9 +55,32 @@ public class CharacterAnimController : MonoBehaviour
         //animator.SetBool(isRunningHash, isSprinting);
         //animator.SetBool(, isGrounded);
         animator.SetBool(isJumpingHash, isJumping);
+
+        if (!isSprinting && isRunning)
+        {
+            animator.SetFloat(inputXhash, currentBlendInput.x * 0.5f);
+        }
         animator.SetFloat(inputXhash, currentBlendInput.x);
         animator.SetFloat(inputYhash, currentBlendInput.y);
         
     }
+
+    public void SetTriggers(PlayerTrigger trigger)
+    {
+        animator.SetTrigger(trigger.ToString());
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
+    
+    public enum PlayerTrigger
+    {
+        DrawSword,
+        SheathSword,
+        AttackSword
+    }
+
     
 }
