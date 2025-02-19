@@ -30,13 +30,16 @@ public class MeleeWeapon : Item
         active = state;
         if (active)
         {
+            gameObject.SetActive(true);
             characterAnimController.SetTriggers(CharacterAnimController.PlayerTrigger.DrawSword);
             animator = characterAnimController.GetAnimator();
+            
             alreadyAttacked = false;
         }
         else
         {
             characterAnimController.SetTriggers(CharacterAnimController.PlayerTrigger.SheathSword);
+
         }
         
     }
@@ -56,7 +59,6 @@ public class MeleeWeapon : Item
     private void HandleAttack()
     {
         timePassed += Time.deltaTime;
-        clipLength = animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
         if ((timePassed >= 1 && Input.GetMouseButtonDown(0)) || (!alreadyAttacked && Input.GetMouseButtonDown(0)))
         {
             Debug.Log("ATAKA");

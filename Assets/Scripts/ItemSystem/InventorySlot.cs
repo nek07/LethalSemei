@@ -29,8 +29,7 @@ public class InventorySlot : MonoBehaviour
         itemIcon.color = Color.white;   // ✅ Иконка предмет
         if (isActive)
         {
-            slotBorder.color = Color.white;
-            itemName.text = item.itemSO.itemName;
+            ActivateSlot();
         }
         
         Debug.Log(item.itemSO.itemName + " in Invetory slot");
