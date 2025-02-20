@@ -34,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 3207218748331236382}
   - {fileID: 2795062515490238848}
+  - {fileID: 2143496898452986641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5514268097096496565
@@ -70,8 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSO: {fileID: 11400000, guid: ed248739a4ffe724798bcb6278df04c3, type: 2}
-  prefab: {fileID: 1451727258380968999}
   rb: {fileID: 7640770955637584218}
+  characterAnimController: {fileID: 0}
 --- !u!54 &7640770955637584218
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,6 +100,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &2777513427015643086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143496898452986641}
+  - component: {fileID: 9154131432184757454}
+  m_Layer: 0
+  m_Name: DamageDealer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2143496898452986641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777513427015643086}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.098, y: 0, z: -0.203}
+  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1.6666665}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6374826838342655306}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!114 &9154131432184757454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777513427015643086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfeb89ead6ef0b41a97847f5077da56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLength: 0.2
+  weaponDamage: 10
 --- !u!1 &4960002467584506251
 GameObject:
   m_ObjectHideFlags: 0

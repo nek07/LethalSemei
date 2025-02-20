@@ -214,6 +214,40 @@ public class PlayerInventory : MonoBehaviour
             }
         }
     }
+
+    public void StartDealDamage()
+    {
+        if(inventorySlots[currentItem] == null || inventorySlots[currentItem].item.itemSO.type != ItemType.Melee) return;
+        try
+        {
+            Item meleeWeapon = inventorySlots[currentItem].item;
+
+            DamageDealer damageDealer = meleeWeapon.GetComponentInChildren<DamageDealer>();
+            damageDealer.StartDealDamage();
+            Debug.Log("Starting damage dealer in inventory");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    public void EndDealDamage()
+    {
+        if(inventorySlots[currentItem] == null || inventorySlots[currentItem].item.itemSO.type != ItemType.Melee) return;
+        try
+        {
+            Item meleeWeapon = inventorySlots[currentItem].item;
+
+            DamageDealer damageDealer = meleeWeapon.GetComponentInChildren<DamageDealer>();
+            damageDealer.EndDealDamage();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }
 
 
