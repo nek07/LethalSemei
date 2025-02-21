@@ -4,7 +4,7 @@ using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FirstPersonController : MonoBehaviour
+public class FirstPersonController : MonoBehaviour, IDieable
 {
     public bool canMove = true;
     private bool IsSprinting => canSprint && Input.GetKey(sprintKey);
@@ -349,6 +349,10 @@ public class FirstPersonController : MonoBehaviour
         targetRecoil = Vector3.MoveTowards(targetRecoil, Vector3.zero, Time.deltaTime * gunData.a_resetRecoilSpeed);
 
     }
-    
+
+    public void Die()
+    {
+        canMove = false;
+    }
     
 }

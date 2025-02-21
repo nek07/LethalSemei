@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using NTC.Global.System;
 using UnityEngine;
  
 public class HealthSystem : MonoBehaviour, IDamagable
@@ -7,7 +9,16 @@ public class HealthSystem : MonoBehaviour, IDamagable
     [SerializeField] float health = 100;
     [SerializeField] GameObject hitVFX;
     [SerializeField] Animator animator;
-    
+    private IDieable controller;
+    [SerializeField] private RagdollOperations ragdoll;
+
+
+    public void Start()
+    {
+        ragdoll = GetComponent<RagdollOperations>();
+        controller = GetComponent<IDieable>();
+    }
+
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
@@ -21,8 +32,10 @@ public class HealthSystem : MonoBehaviour, IDamagable
  
     void Die()
     {
-        //Instantiate(ragdoll, transform.position, transform.rotation);
-        Destroy(this.gameObject);
+        Debug.Log("Umer kak loh");
+        animator.enabled = false;
+        ragdoll.EnableRagdoll();
+        controller.Die();
     }
     //public void HitVFX(Vector3 hitPosition)
     //{
@@ -30,4 +43,9 @@ public class HealthSystem : MonoBehaviour, IDamagable
        // Destroy(hit, 3f);
  
 //    }
+}
+
+public interface IDieable
+{
+    public void Die();
 }

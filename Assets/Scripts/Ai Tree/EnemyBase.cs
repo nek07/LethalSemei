@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 using System.Collections.Generic; // Для использования List
 
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviour, IDieable
 {
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
@@ -12,6 +12,8 @@ public abstract class EnemyBase : MonoBehaviour
     public float chaseSpeed = 4f;
     public float detectionRange = 10f;
     public float attackRange = 2f;
+    public float attackDamage = 20f;
+    public float attackCooldown = 1f;
 
     public List<Transform> patrolPoints; // Список точек патруля, куда NPC будет идти
 
@@ -55,5 +57,10 @@ public abstract class EnemyBase : MonoBehaviour
     public void SetAttack(bool isAttacking)
     {
         animator.SetBool("IsAttacking", isAttacking);
+    }
+
+    public void Die()
+    {
+        this.enabled = false;
     }
 }

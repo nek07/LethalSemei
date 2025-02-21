@@ -4,6 +4,7 @@ using UnityEngine;
 public class AttackTask : BTNode
 {
     private EnemyBase enemy;
+    private float lastAttackTime = 0f;
 
     public AttackTask(EnemyBase enemy)
     {
@@ -27,6 +28,12 @@ public class AttackTask : BTNode
 
             enemy.agent.ResetPath();
             enemy.SetAttack(true);  // Включаем анимацию атаки
+            
+            if (Time.time - lastAttackTime >= enemy.attackCooldown)
+            {
+                lastAttackTime = Time.time;
+                TryAttack();
+            }
             return true;
         }
         else
@@ -35,5 +42,14 @@ public class AttackTask : BTNode
         }
 
         return false;
+    }
+    
+    private void TryAttack()
+    {
+        IDamagable target = enemy.player.GetComponent<IDamagable>();
+        if (target != null)
+        {
+            target.TakeDamage(enemy.attackDamage);
+        }
     }
 }
