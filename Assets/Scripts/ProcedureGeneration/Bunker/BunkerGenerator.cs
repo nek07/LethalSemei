@@ -16,14 +16,16 @@ public class BunkerGenerator : MonoBehaviour
     [SerializeField] private LayerMask roomsLayerMask;
 
     private List<GenLevelPart> generatedRooms;
-    private bool isGenerated = false;
+    public bool isGenerated = false;
 
     private void Start()
     {
+
         generatedRooms = new List<GenLevelPart>();
         StartGeneration();
     }
-
+    
+   
     public void StartGeneration()
     {
         Debug.Log("Starting generation...");

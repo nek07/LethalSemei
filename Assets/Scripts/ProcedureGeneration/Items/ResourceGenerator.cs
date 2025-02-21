@@ -1,55 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class ResourceGenerator : MonoBehaviour
 {
     [Header("Spawn settings")]
     public List<GameObject> resourcePrefabs; // Список префабов ресурсов
     public float spawnChance;
- 
+
     [Header("Raycast setup")]
     public float distanceBetweenCheck;
     public float heightOfCheck = 10f, rangeOfCheck = 30f;
     public LayerMask layerMask;
-    public Vector2 positivePosition, negativePosition;
-    
+    public Vector3 positivePosition, negativePosition; // Изменено с Vector2 на Vector3
+
     private void Start()
     {
-        SpawnResources();
+        StartCoroutine(SpawnResources());
     }
- 
-    private void Update()
+
+    IEnumerator SpawnResources()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SpawnResources();
-        }
-    }
- 
-    void SpawnResources()
-    {
+        yield return new WaitForSeconds(5f); // Ждём перед спавном
+        Debug.Log("IMHERE");
+
         if (resourcePrefabs.Count == 0)
         {
             Debug.LogWarning("Нет ресурсов для спавна!");
-            return;
+            yield break; // Останавливаем корутину, если нечего спавнить
         }
 
+        // Проход по X, Y, Z для трехмерного распределения
         for (float x = negativePosition.x; x < positivePosition.x; x += distanceBetweenCheck)
         {
-            for (float z = negativePosition.y; z < positivePosition.y; z += distanceBetweenCheck)
+            for (float y = negativePosition.y; y < positivePosition.y; y += distanceBetweenCheck) // Учитываем Y
             {
-                RaycastHit hit;
-                if (Physics.Raycast(new Vector3(x, heightOfCheck, z), Vector3.down, out hit, rangeOfCheck, layerMask))
+                for (float z = negativePosition.z; z < positivePosition.z; z += distanceBetweenCheck)
                 {
-                    if (spawnChance > Random.Range(0f, 101f))
+                    RaycastHit hit;
+                    Vector3 checkPosition = new Vector3(x, y, z);
+
+                    if (Physics.Raycast(checkPosition, Vector3.down, out hit, rangeOfCheck, layerMask))
                     {
-                        // Выбираем случайный префаб из списка
-                        GameObject randomPrefab = resourcePrefabs[Random.Range(0, resourcePrefabs.Count)];
-                        Instantiate(randomPrefab, hit.point, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)), transform);
+                        if (spawnChance > Random.Range(0f, 101f))
+                        {
+                            GameObject randomPrefab = resourcePrefabs[Random.Range(0, resourcePrefabs.Count)];
+                            Instantiate(randomPrefab, hit.point, Quaternion.Euler(0, Random.Range(0, 360), 0), transform);
+                        }
                     }
                 }
             }
         }
+
+        Debug.Log("DONEEEEEEEEEEE");
     }
 }
