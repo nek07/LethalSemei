@@ -6,50 +6,52 @@ public class DamageDealer : MonoBehaviour
     private bool canDealDamage;
     private List<GameObject> hasDealtDamage;
     private IDamagable master;
+    private BoxCollider hitbox; // Коллайдер для удара
 
-    [SerializeField] private float weaponLength = 1.5f;
     [SerializeField] private float weaponDamage = 10f;
 
     private void Start()
     {
         canDealDamage = false;
         hasDealtDamage = new List<GameObject>();
+        hitbox = GetComponent<BoxCollider>();
+
+        if (hitbox == null)
+        {
+            Debug.LogError("DamageDealer: BoxCollider отсутствует! Добавь его на объект с этим скриптом.");
+        }
+        else
+        {
+            hitbox.isTrigger = true;
+            hitbox.enabled = false; // Отключаем, пока не атакуем
+        }
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (canDealDamage)
+        if (!canDealDamage) return; // Если не в атаке — ничего не делаем
+        master = GetComponentInParent<IDamagable>();
+        if (other.gameObject.TryGetComponent<IDamagable>(out IDamagable damagable) 
+            && !hasDealtDamage.Contains(other.gameObject)
+            && master != damagable)
         {
-            master = GetComponentInParent<IDamagable>();
-            RaycastHit hit;
-            int layerMask = 0 << 9; // Маска слоя врагов
-            Debug.Log("Deal govna1");
-            if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength))
-            {
-                Debug.Log("Deal govna2" + hit.collider.gameObject.name);
-                if (hit.collider.gameObject.TryGetComponent<IDamagable>(out IDamagable damagable) 
-                    && !hasDealtDamage.Contains(hit.transform.gameObject)
-                    && damagable != master)
-                {
-                    damagable.TakeDamage(weaponDamage); // Вызываем метод интерфейса
-                    Debug.Log("Dealing damage");
-                    hasDealtDamage.Add(hit.transform.gameObject);
-                    damagable.HitVFX(hit.transform.position);
-                    return;
-                }
+            damagable.TakeDamage(weaponDamage);
+            damagable.HitVFX(other.transform.position);
+            Debug.Log("Dealing damage to: " + other.gameObject.name);
+            hasDealtDamage.Add(other.gameObject);
+            return;
+        }
 
-                IDamagable damagableParent = hit.collider.gameObject.GetComponentInParent<IDamagable>();
-                if (damagableParent != null &&
-                    !hasDealtDamage.Contains(hit.transform.gameObject) &&
-                    damagableParent != master)
-                {
-                    Debug.Log("Parent Dealing damage");
-                    damagableParent.TakeDamage(weaponDamage); // Вызываем метод интерфейса
-                    damagableParent.HitVFX(hit.transform.position);
-                    Debug.Log("Dealing damage");
-                    hasDealtDamage.Add(hit.transform.gameObject);
-                }
-            }
+        IDamagable damagableParent = other.gameObject.GetComponentInParent<IDamagable>();
+        
+        if(damagableParent != null &&
+           damagableParent != master &&
+           !hasDealtDamage.Contains(other.gameObject))
+        {
+            damagableParent.TakeDamage(weaponDamage);
+            damagableParent.HitVFX(other.transform.position);
+            Debug.Log("Dealing damage to: " + other.gameObject.name);
+            hasDealtDamage.Add(other.gameObject);
         }
     }
 
@@ -57,18 +59,14 @@ public class DamageDealer : MonoBehaviour
     {
         canDealDamage = true;
         hasDealtDamage.Clear();
-        Debug.Log("Can dealing true");
+        hitbox.enabled = true; // Включаем hitbox
+        Debug.Log("Damage hitbox активирован");
     }
 
     public void EndDealDamage()
     {
         canDealDamage = false;
-        Debug.Log("Can dealing false");
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
+        hitbox.enabled = false; // Отключаем hitbox
+        Debug.Log("Damage hitbox отключен");
     }
 }

@@ -73,6 +73,7 @@ MonoBehaviour:
   itemSO: {fileID: 11400000, guid: ed248739a4ffe724798bcb6278df04c3, type: 2}
   rb: {fileID: 7640770955637584218}
   characterAnimController: {fileID: 0}
+  isIntreactable: 1
 --- !u!54 &7640770955637584218
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,6 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2143496898452986641}
   - component: {fileID: 9154131432184757454}
+  - component: {fileID: 7143843715494047281}
   m_Layer: 0
   m_Name: DamageDealer
   m_TagString: Untagged
@@ -144,8 +146,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfeb89ead6ef0b41a97847f5077da56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLength: 0.2
-  weaponDamage: 40
+  weaponDamage: 5
+--- !u!65 &7143843715494047281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777513427015643086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.22238423, y: 0.19628564, z: 0.047726676}
+  m_Center: {x: 0.05578628, y: -0.05174949, z: 0.0045060236}
 --- !u!1 &4960002467584506251
 GameObject:
   m_ObjectHideFlags: 0

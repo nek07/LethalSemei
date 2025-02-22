@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SimpleItem : Item
 {
-    public SimpleItem(ItemSO itemSo, Rigidbody rb, CharacterAnimController anim) : base(itemSo,rb, anim)
+    public SimpleItem(ItemSO itemSo, Rigidbody rb, CharacterAnimController anim, bool isInteractive) : base(itemSo,rb, anim, isInteractive)
     {
     }
 

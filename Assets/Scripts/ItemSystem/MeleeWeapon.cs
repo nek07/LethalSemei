@@ -15,7 +15,7 @@ public class MeleeWeapon : Item
     private bool alreadyAttacked;
     
 
-    public MeleeWeapon(ItemSO itemSO, bool active, Rigidbody rb, CharacterAnimController anim) : base(itemSO, rb, anim)
+    public MeleeWeapon(ItemSO itemSO, bool active, Rigidbody rb, CharacterAnimController anim, bool isInteractive) : base(itemSO, rb, anim, isInteractive)
     {
         this.active = active;
     }
@@ -56,6 +56,13 @@ public class MeleeWeapon : Item
         HandleAttack();
     }
 
+    public override void OnDropItem()
+    {
+        active = false;
+        characterAnimController.SetTriggers(CharacterAnimController.PlayerTrigger.SheathSword);
+        base.OnDropItem();
+    }
+
     private void HandleAttack()
     {
         timePassed += Time.deltaTime;
@@ -67,6 +74,7 @@ public class MeleeWeapon : Item
             alreadyAttacked = true;
         }
     }
+    
 
 
     

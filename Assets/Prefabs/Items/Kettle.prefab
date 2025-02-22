@@ -88,8 +88,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSO: {fileID: 11400000, guid: 6f4f316501826f0428cc28d5f76e969a, type: 2}
-  prefab: {fileID: 742065065763267602}
   rb: {fileID: 8358791378079897163}
+  characterAnimController: {fileID: 0}
+  isIntreactable: 1
 --- !u!54 &8358791378079897163
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -217,9 +217,9 @@ public class PlayerInventory : MonoBehaviour
 
     public void StartDealDamage()
     {
-        if(inventorySlots[currentItem] == null || inventorySlots[currentItem].item.itemSO.type != ItemType.Melee) return;
         try
         {
+            if(inventorySlots[currentItem] == null || inventorySlots[currentItem].item.itemSO.type != ItemType.Melee) return;
             Item meleeWeapon = inventorySlots[currentItem].item;
 
             DamageDealer damageDealer = meleeWeapon.GetComponentInChildren<DamageDealer>();
@@ -251,7 +251,7 @@ public class PlayerInventory : MonoBehaviour
 }
 
 
-public interface IPickable
+public interface IPickable: IInteractable
 {
     Item GetItem();
     void OnPickItem();

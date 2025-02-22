@@ -1588,7 +1588,7 @@ MonoBehaviour:
   chaseSpeed: 4
   detectionRange: 10
   attackRange: 2
-  attackDamage: 5
+  attackDamage: 0
   attackCooldown: 1
   patrolPoints:
   - {fileID: 0}
