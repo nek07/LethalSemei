@@ -1,6 +1,7 @@
 using ItemSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
@@ -9,11 +10,12 @@ public class InventorySlot : MonoBehaviour
     [SerializeField]private TextMeshProUGUI itemName;
     [SerializeField]private Image slotBorder;
     private Sprite itemSprite;
+    private TwoBoneIKConstraint rightHandRig; 
     
     public Item item;
     public GameObject slotGameObject;
 
-    public void SetSlot(GameObject slotGameObject, bool isActive)
+    public void SetSlot(GameObject slotGameObject, bool isActive, TwoBoneIKConstraint rightHandRig)
     {
         this.slotGameObject = slotGameObject;
         if (slotGameObject != null)
@@ -21,6 +23,7 @@ public class InventorySlot : MonoBehaviour
             item = slotGameObject.GetComponent<Item>();
             item.rb.isKinematic = true;
         }
+        this.rightHandRig = rightHandRig;
 
         itemSprite = item.itemSO.itemSprite;
         itemIcon.sprite = itemSprite;
@@ -44,6 +47,10 @@ public class InventorySlot : MonoBehaviour
         {
             slotGameObject.SetActive(true);
             item.SetActive(true);
+            if (rightHandRig != null && item.itemSO.type != ItemType.Melee)
+            {
+                rightHandRig.weight = 1f;
+            }
         }
         else
         {
@@ -60,6 +67,10 @@ public class InventorySlot : MonoBehaviour
             slotGameObject.SetActive(false);
             slotBorder.color = Color.black;
             itemIcon.color = new Color(51, 51, 51, 255);
+            if (rightHandRig != null)
+            {
+                rightHandRig.weight = 0f;
+            }
         }
         else
         {
@@ -75,6 +86,10 @@ public class InventorySlot : MonoBehaviour
         itemName.text = "";
         slotBorder.color = Color.black;
         item = null;
+        if (rightHandRig != null)
+        {
+            rightHandRig.weight = 0f;
+        }
     }
     
     

@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using ItemSystem;
 using Unity.VisualScripting;
-using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private CharacterAnimController animController;
     [SerializeField] private Transform itemHolder;
     [SerializeField] private GameObject rightHand;
+    [SerializeField] private TwoBoneIKConstraint rightHandRig;
     
     [Space(10)]
     [Header("Keys")]
@@ -146,15 +146,9 @@ public class PlayerInventory : MonoBehaviour
         
         Debug.Log("Character Anim " + item.characterAnimController.name);
         var slot = inventorySlots[slotIndex];
+        item.gameObject.transform.SetParent(rightHand.transform);
         
-        if (item.itemSO.type == ItemType.Melee)
-        {
-            item.gameObject.transform.SetParent(rightHand.transform);
-        }
-        else
-        {
-            item.gameObject.transform.SetParent(itemHolder);
-        }
+       
         item.gameObject.transform.localPosition = item.itemSO.itemPositionOffset;
         item.gameObject.transform.localRotation = item.itemSO.itemRotationOffset;
 
@@ -163,7 +157,7 @@ public class PlayerInventory : MonoBehaviour
             item.gameObject.SetActive(false);
         }
 
-        slot.SetSlot(item.gameObject, slotIndex == currentItem);
+        slot.SetSlot(item.gameObject, slotIndex == currentItem, rightHandRig);
         return true;
     }
 

@@ -174,7 +174,7 @@ public class FirstPersonController : MonoBehaviour, IDieable
     {
         rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
         rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
-        headTarget.localPosition = Vector3.Slerp(headTarget.localPosition, new Vector3(0, rotationX / -15, 1.5f), Time.deltaTime * 50);
+        headTarget.localPosition = Vector3.Slerp(headTarget.localPosition, new Vector3(0, rotationX / -15, 4f), Time.deltaTime * 50);
         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(rotationX + currentRecoil.y, 0, 0), Time.deltaTime * 50);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
     }

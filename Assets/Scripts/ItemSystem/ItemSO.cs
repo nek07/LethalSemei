@@ -11,6 +11,10 @@ public class ItemSO : ScriptableObject
     public Vector3 itemPositionOffset;
     public Quaternion itemRotationOffset;
     public ItemType type;
+    
+    [Header("IK position (skip if dont need)")]
+    public Vector3 rightHandPosition;
+    public Quaternion rightHandRotation;
 }
 
 public enum ItemType
