@@ -6,4 +6,10 @@ public class EnemyTest: MonoBehaviour, IDamagable
     {
         Debug.Log(amount + "Больно урод");
     }
+
+    public void HitVFX(Vector3 hitPosition)
+    {
+        Debug.Log(hitPosition);
+    }
+    
 }

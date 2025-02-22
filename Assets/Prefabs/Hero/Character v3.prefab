@@ -3527,8 +3527,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  hitVFX: {fileID: 0}
+  hitVFX: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   animator: {fileID: 6215960621206388935}
+  ragdoll: {fileID: 0}
 --- !u!1 &8676784135179946806
 GameObject:
   m_ObjectHideFlags: 0

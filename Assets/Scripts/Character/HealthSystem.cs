@@ -21,8 +21,9 @@ public class HealthSystem : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damageAmount)
     {
+        Debug.Log(gameObject.name + " damage " + damageAmount);
         health -= damageAmount;
-        animator.SetTrigger("damage");
+        //animator.SetTrigger("damage");
  
         if (health <= 0)
         {
@@ -37,15 +38,16 @@ public class HealthSystem : MonoBehaviour, IDamagable
         ragdoll.EnableRagdoll();
         controller.Die();
     }
-    //public void HitVFX(Vector3 hitPosition)
-    //{
-     //   GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
-       // Destroy(hit, 3f);
+    public void HitVFX(Vector3 hitPosition)
+    {
+        GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
+        Destroy(hit, 3f);
  
-//    }
+    }
 }
 
 public interface IDieable
 {
     public void Die();
+   
 }

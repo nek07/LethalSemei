@@ -50,6 +50,7 @@ public class AttackTask : BTNode
         if (target != null)
         {
             target.TakeDamage(enemy.attackDamage);
+            target.HitVFX(enemy.player.transform.position);
         }
     }
 }

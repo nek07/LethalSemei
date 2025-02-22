@@ -61,6 +61,7 @@ public abstract class EnemyBase : MonoBehaviour, IDieable
 
     public void Die()
     {
+        GetComponent<NPCLookAtPlayer>().enabled = false;
         this.enabled = false;
     }
 }
