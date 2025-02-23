@@ -125,6 +125,11 @@ public class BunkerGenerator : MonoBehaviour
                             transform.position, transform.rotation);
 
                         Debug.Log($"{(isPlaceSpecialRoom ? "Special room" : "Regular room")} generated.");
+
+                        if (isPlaceSpecialRoom)
+                        {
+                            specialRooms.RemoveAt(randomIndex);
+                        }
                     }
                     else
                     {
@@ -172,17 +177,18 @@ public class BunkerGenerator : MonoBehaviour
 
     private bool HandleIntersection(GenLevelPart genLevelPart)
     {
-        Collider[] hits = Physics.OverlapBox(genLevelPart.collider.bounds.center, genLevelPart.collider.bounds.size / 2,
-            Quaternion.identity, roomsLayerMask);
-        foreach (Collider hit in hits)
+        foreach (var col in genLevelPart.colliders)
         {
-            if (hit != genLevelPart.collider)
+            Collider[] hits = Physics.OverlapBox(col.bounds.center, col.bounds.size / 2, Quaternion.identity, roomsLayerMask);
+            foreach (Collider hit in hits)
             {
-                Debug.LogWarning($"Intersection detected with {hit.gameObject.name}.");
-                return true;
+                if (!genLevelPart.colliders.Contains(hit)) // Проверяем, что не пересекаемся сами с собой
+                {
+                    Debug.LogWarning($"Intersection detected with {hit.gameObject.name}.");
+                    return true;
+                }
             }
         }
-
         return false;
     }
 

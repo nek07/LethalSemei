@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,7 +14,7 @@ public class GenLevelPart : MonoBehaviour
     [SerializeField] private PartType partType;
     [SerializeField] private GameObject fillerWall;
     public List<Transform> entrypoints;
-    public new Collider collider;
+    public List<Collider> colliders = new List<Collider>(); // Теперь список коллайдеров
 
     public bool HasAvailableEntrypoint(out Transform entrypoint)
     {
@@ -25,28 +23,6 @@ public class GenLevelPart : MonoBehaviour
 
         int totalRetries = 100;
         int retryIndex = 0;
-
-        if (entrypoints.Count == 1)
-        {
-            Transform entry = entrypoints[0];
-            if (entry.TryGetComponent<EntryPoint>(out EntryPoint res))
-            {
-                if (res.IsOccupied())
-                {
-                    result = false;
-                    resultingEntry = null;
-                }
-                else
-                {
-                    result = true;
-                    resultingEntry = entry;
-                    res.SetOccupied();
-                }
-
-                entrypoint = resultingEntry;
-                return result;
-            }
-        }
 
         while (resultingEntry == null && retryIndex < totalRetries)
         {
@@ -81,37 +57,24 @@ public class GenLevelPart : MonoBehaviour
 
     public void FillEmptyDoors()
     {
-        entrypoints.ForEach((entry) =>
+        foreach (var entry in entrypoints)
         {
-            if (entry.TryGetComponent(out EntryPoint entryPoint))
+            if (entry.TryGetComponent(out EntryPoint entryPoint) && !entryPoint.IsOccupied())
             {
-                if (!entryPoint.IsOccupied())
-                {
-                    GameObject wall = Instantiate(fillerWall);
-                    //wall.GetComponent<NetworkObject>().Spawn(true);
-                    wall.transform.position = entry.transform.position;
-                    wall.transform.rotation = entry.transform.rotation;
-                }
+                GameObject wall = Instantiate(fillerWall);
+                wall.transform.position = entry.transform.position;
+                wall.transform.rotation = entry.transform.rotation;
             }
-        });
+        }
     }
 
     private void OnDrawGizmos()
     {
-        if (partType == PartType.Room)
-        {
-            Gizmos.color = Color.magenta;
-        }
-        else
-        {
-            Gizmos.color = Color.yellow;
-        }
-        
-        Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
-    }
+        Gizmos.color = partType == PartType.Room ? Color.magenta : Color.yellow;
 
-   /* public NetworkObject GetNetworkObject()
-    {
-        return NetworkObject;
-    }*/
+        foreach (var col in colliders)
+        {
+            Gizmos.DrawWireCube(col.bounds.center, col.bounds.size);
+        }
+    }
 }
