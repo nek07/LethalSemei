@@ -153,9 +153,16 @@ public class FirstPersonController : MonoBehaviour, IDieable
         }
     }
 
-    
 
 
+    public void Teleport(Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        Physics.SyncTransforms();
+        // look.x = rotation.eulerAngles.y;
+        // look.y = rotation.eulerAngles.x;
+        // velocity = Vector3.zero;
+    }
     private void HandleMovementInput()
     {
         currentInput = new Vector2((isCrouching? crouchSpeed: IsSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical"), (isCrouching? crouchSpeed: IsSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal"));

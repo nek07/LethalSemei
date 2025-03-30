@@ -589,6 +589,7 @@ MonoBehaviour:
   roomsLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  isGenerated: 0
 --- !u!4 &70080534
 Transform:
   m_ObjectHideFlags: 0
@@ -677,8 +678,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  positivePosition: {x: 500, y: 100}
-  negativePosition: {x: 0, y: -100}
+  positivePosition: {x: 500, y: 100, z: 0}
+  negativePosition: {x: 0, y: -100, z: 0}
 --- !u!4 &310227706
 Transform:
   m_ObjectHideFlags: 0
@@ -8250,116 +8251,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4517956020aa54989cd9a8a7e55b1b, type: 3}
---- !u!1 &1913905817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1913905818}
-  - component: {fileID: 1913905819}
-  m_Layer: 0
-  m_Name: TimeController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1913905818
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913905817}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1913905819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913905817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc4545bbe08f514b9e94191a2672051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeMultiplier: 2500
-  startHour: 15
-  timeText: {fileID: 2062396956}
-  sunLight: {fileID: 947643340}
-  sunriseHour: 7
-  sunsetHour: 20.5
-  dayAmbientLight: {r: 0.67614806, g: 0.7300769, b: 0.735849, a: 0}
-  nightAmbientLight: {r: 0.13911712, g: 0.23114948, b: 0.4415095, a: 0}
-  lightChangeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.044580676
-      value: 0.7781409
-      inSlope: 1.7227855
-      outSlope: 1.7227855
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.44425917
-      outWeight: 0.49585098
-    - serializedVersion: 3
-      time: 0.12392104
-      value: 0.87548
-      inSlope: 0.9210108
-      outSlope: 0.9210108
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.9655717
-    - serializedVersion: 3
-      time: 0.20973592
-      value: 0.930471
-      inSlope: 0.3878244
-      outSlope: 0.3878244
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxSunLightIntensity: 1
-  moonLight: {fileID: 886487619}
-  maxMoonLightIntensity: 0.5
-  rainEffect: {fileID: 348370174}
-  windZone: {fileID: 0}
-  player: {fileID: 931704030}
-  rainOffset: {x: 0, y: 6, z: 0}
 --- !u!1001 &1967201238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9073,6 +8964,99 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 047f9577874816d448c1722e9757d273, type: 3}
+--- !u!1001 &2479288023528582509
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1930790222450712054, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_Name
+      value: TimeController
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587744702081332045, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819060558045862461, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 931704030}
+    - target: {fileID: 6819060558045862461, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: sunLight
+      value: 
+      objectReference: {fileID: 947643340}
+    - target: {fileID: 6819060558045862461, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 2062396956}
+    - target: {fileID: 6819060558045862461, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: moonLight
+      value: 
+      objectReference: {fileID: 886487619}
+    - target: {fileID: 6819060558045862461, guid: 2bac7c979e91c984299d029c5d98e06d,
+        type: 3}
+      propertyPath: rainEffect
+      value: 
+      objectReference: {fileID: 348370174}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bac7c979e91c984299d029c5d98e06d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -9101,7 +9085,7 @@ SceneRoots:
   - {fileID: 48404505}
   - {fileID: 704589903}
   - {fileID: 886487620}
-  - {fileID: 1913905818}
+  - {fileID: 2479288023528582509}
   - {fileID: 1518983578}
   - {fileID: 2343672094809977428}
   - {fileID: 70080534}

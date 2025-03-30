@@ -3293,6 +3293,7 @@ MonoBehaviour:
   timeToCrouch: 0.1
   crouchingCenter: {x: 0, y: 0.56, z: 0}
   standingCenter: {x: 0, y: 0.92, z: 0}
+  isCrouching: 0
   walkBobSpeed: 14
   walkBobAmount: 0.05
   sprintBobSpeed: 18
@@ -3302,11 +3303,7 @@ MonoBehaviour:
   baseStepSpeed: 0.5
   crouchStepMultipler: 1.5
   sprintStepMultipler: 0.6
-  footStepAudioSource: {fileID: 8319192434057994217}
-  woodClips: []
-  metalClips: []
-  grassClips: []
-  dirtClips: []
+  runAudioSource: {fileID: 8319192434057994217}
 --- !u!82 &8319192434057994217
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3317,9 +3314,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3aaa899d43138db4c860e16fd63f95da, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.49
   m_Pitch: 1
   Loop: 0
   Mute: 0

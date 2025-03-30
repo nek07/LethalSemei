@@ -21,7 +21,7 @@ public class ResourceGenerator : MonoBehaviour
 
     IEnumerator SpawnResources()
     {
-        yield return new WaitForSeconds(5f); // Ждём перед спавном
+        yield return new WaitForSeconds(10f); // Ждём перед спавном
         Debug.Log("IMHERE");
 
         if (resourcePrefabs.Count == 0)

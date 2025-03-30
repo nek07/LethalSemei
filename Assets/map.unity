@@ -589,6 +589,7 @@ MonoBehaviour:
   roomsLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  isGenerated: 0
 --- !u!4 &70080534
 Transform:
   m_ObjectHideFlags: 0
@@ -677,8 +678,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  positivePosition: {x: 500, y: 100}
-  negativePosition: {x: 0, y: -100}
+  positivePosition: {x: 500, y: 100, z: 0}
+  negativePosition: {x: 0, y: -100, z: 0}
 --- !u!4 &310227706
 Transform:
   m_ObjectHideFlags: 0
