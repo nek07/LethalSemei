@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: f2b6b7c02a3f667499e16330d83aa88b, type: 3}
   itemName: Kettle
-  itemPositionOffset: {x: -0.054, y: -0.071, z: -0.161}
-  itemRotationOffset: {x: 0.02094701, y: 0.4691956, z: 0.7151948, w: 0.5176033}
+  itemPositionOffset: {x: 0.00044, y: 0.0005, z: 0.000902}
+  itemRotationOffset: {x: -0.48281565, y: 0.5157069, z: -0.47255975, w: -0.5268992}
   type: 1
-  rightHandPosition: {x: 0.25, y: -0.18, z: 0.44}
-  rightHandRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  rightHandPosition: {x: 0, y: 0, z: 0}
+  rightHandRotation: {x: -0.21139568, y: 0.41428143, z: 0.65621215, w: 0.5941956}
