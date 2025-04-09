@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.024
@@ -97,7 +97,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 8abb75f2d745edc4789a8ef0c2f41f92,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -52870,94 +52871,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2146519542}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4632745416097615901
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1288164392365359365, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_Name
-      value: TimeController
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937039452929961918, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163698048908461774, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: sunLight
-      value: 
-      objectReference: {fileID: 617833787}
-    - target: {fileID: 6163698048908461774, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: moonLight
-      value: 
-      objectReference: {fileID: 1960254325}
-    - target: {fileID: 6163698048908461774, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: maxSunLightIntensity
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163698048908461774, guid: 183d9574c5146104e817820fe5cde039,
-        type: 3}
-      propertyPath: maxMoonLightIntensity
-      value: 0.2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 183d9574c5146104e817820fe5cde039, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -52977,7 +52890,6 @@ SceneRoots:
   - {fileID: 1554388861}
   - {fileID: 1363234155}
   - {fileID: 1648363211}
-  - {fileID: 4632745416097615901}
   - {fileID: 1960254326}
   - {fileID: 766120506}
   - {fileID: 1116872156}
