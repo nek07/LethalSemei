@@ -23,7 +23,7 @@ public class HealthSystem : MonoBehaviour, IDamagable
     {
         Debug.Log(gameObject.name + " damage " + damageAmount);
         health -= damageAmount;
-        //animator.SetTrigger("damage");
+        animator.SetTrigger("damage");
  
         if (health <= 0)
         {
