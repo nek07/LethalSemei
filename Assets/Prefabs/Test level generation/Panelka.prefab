@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3179171935015113386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8379234382115254423}
+  - component: {fileID: 6520990638187154760}
+  m_Layer: 0
+  m_Name: Panelka
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8379234382115254423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179171935015113386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5874229740808737510}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6520990638187154760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179171935015113386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afbef8601c3d5d4e980ea94242a8ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorPrefabs:
+  - {fileID: 91111306553405595, guid: 0cdc1a6c5d2db334085c386f5667f4c9, type: 3}
+  stairsPrefabs:
+  - {fileID: 1496409850046431836, guid: 3d7a1bba2aeffa842a755afe0055b2cf, type: 3}
+  fullWallPrefabs:
+  - {fileID: 3375755586134083071, guid: 341364a1724b5fe46b9f63f88e1a12c6, type: 3}
+  bacloniesPrefabs:
+  - {fileID: 1496409850046431836, guid: 3d7a1bba2aeffa842a755afe0055b2cf, type: 3}
+  lowerWallPrefab: {fileID: 7407447655739962039, guid: 3426552c25462fa48bdfc834bfa1efac,
+    type: 3}
+  upperWallPrefab: {fileID: 3375755586134083071, guid: 341364a1724b5fe46b9f63f88e1a12c6,
+    type: 3}
+  numberOfFloors: -1
+  maxNumFloor: 16
+  width: -1
+  maxWidth: 6
+  panelType: 0
+  startPoint: {fileID: 8379234382115254423}
+  tr: {fileID: 5874229740808737510}
+--- !u!1 &3464476074919524543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5874229740808737510}
+  m_Layer: 0
+  m_Name: tr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5874229740808737510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464476074919524543}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -22.294464, y: -0.1553967, z: -0.69538784}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8379234382115254423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
