@@ -1588,6 +1588,94 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &426083304
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3734564717543470171, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767127294114703914, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767127294114703914, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: brakeForce
+      value: 319
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767127294114703914, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: decelerationMultiplier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099103330091054582, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_Name
+      value: KamazCarController
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 45.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211838958638077636, guid: 36c9784e63ab1cc4aafeeccb0320818a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36c9784e63ab1cc4aafeeccb0320818a, type: 3}
 --- !u!1 &442306988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,74 +3307,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1001 &1468795879
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1652744830769609727, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_Name
-      value: Character v2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 242.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 14.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 125.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999976
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.002181689
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6527839469756364768, guid: b469a4e9b7de1a841a629d143e93ece5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b469a4e9b7de1a841a629d143e93ece5, type: 3}
 --- !u!4 &1469674726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4849962468261341550, guid: 9387ad5192150a845bbd6e4cf93d8554,
@@ -3812,75 +3832,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc4545bbe08f514b9e94191a2672051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalLight: {fileID: 947643340}
-  lightColor:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0.50980395, g: 0.26666668, b: 0.65882355, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 53122
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  lightIntensity:
+  timeMultiplier: 0
+  startHour: 0
+  timeText: {fileID: 0}
+  sunLight: {fileID: 0}
+  sunriseHour: 0
+  sunsetHour: 0
+  dayAmbientLight: {r: 0, g: 0, b: 0, a: 0}
+  nightAmbientLight: {r: 0, g: 0, b: 0, a: 0}
+  lightChangeCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dayDuration: 60
-  skyboxMaterial: {fileID: 2100000, guid: e042e3a075d43734cb2151822f3efb89, type: 2}
-  skyboxColor:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 1, g: 1, b: 1, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 5166
-    ctime1: 39552
-    ctime2: 63916
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 2
-    m_ColorSpace: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
+  maxSunLightIntensity: 0
+  moonLight: {fileID: 0}
+  maxMoonLightIntensity: 0
+  rainEffect: {fileID: 0}
+  windZone: {fileID: 0}
+  player: {fileID: 0}
+  rainOffset: {x: 0, y: 10, z: 0}
 --- !u!4 &1607189298
 Transform:
   m_ObjectHideFlags: 0
@@ -3908,28 +3880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba45972cdf7f384bbb1082869bc08bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartDay: 1
-  StarDome: {fileID: 0}
-  moonState: {fileID: 0}
-  moon: {fileID: 0}
-  dawnColors:
-    skyColor: {r: 0.31097892, g: 0.534709, b: 0.78113204, a: 0}
-    equatorColor: {r: 0.75093627, g: 0.93207544, b: 0.92225015, a: 0}
-    horizonColor: {r: 1, g: 0.7905661, b: 0.7905661, a: 0}
-  dayColors:
-    skyColor: {r: 0.47358483, g: 0.84939843, b: 1, a: 0}
-    equatorColor: {r: 0.46770376, g: 0.6057451, b: 0.6150943, a: 0}
-    horizonColor: {r: 0.3430188, g: 0.5143396, b: 0.5999999, a: 0}
-  nightColors:
-    skyColor: {r: 0, g: 0, b: 0, a: 0}
-    equatorColor: {r: 0.09433961, g: 0.054645773, b: 0.054645773, a: 0}
-    horizonColor: {r: 0.16226411, g: 0.14909929, b: 0.14909929, a: 0}
-  currentDay: 0
-  directionalLight: {fileID: 947643340}
-  SecondsInAFullDay: 120
-  currentTime: 0
-  timeMultiplier: 1
-  showUI: 0
 --- !u!1 &1668718162
 GameObject:
   m_ObjectHideFlags: 0
@@ -5386,7 +5336,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1468795879}
+  - {fileID: 426083304}
   - {fileID: 1090250766}
   - {fileID: 1607189298}
   - {fileID: 947643341}
