@@ -33,7 +33,7 @@ public abstract class Gun : MonoBehaviour
 
     public virtual void Update()
     {
-        playerController.ResetRecoil(gunData);
+        // playerController.ResetRecoil(gunData);
         ResetDirectionalRecoil();
     }
 
@@ -92,8 +92,8 @@ public abstract class Gun : MonoBehaviour
         currentAmmo--;
         Debug.Log(gunData.gunName + " Shot!!!, Bullets: " + currentAmmo);
         Shoot();
-        
-        playerController.ApllyRecoil(gunData);
+        //
+        // playerController.ApplyRecoil(gunData);
         ApllyDirectionalRecoil();
     }
 

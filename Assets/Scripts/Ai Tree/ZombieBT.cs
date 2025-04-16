@@ -13,7 +13,8 @@ public class ZombieBT : EnemyBase
         ChaseTask chase = new ChaseTask(this);
         AttackTask attack = new AttackTask(this);
 
-        rootNode = new Selector(new BTNode[] { patrol, chase,attack });
+        rootNode = new Selector(new BTNode[] { attack, chase, patrol });
+
     }
 
     private void Update()

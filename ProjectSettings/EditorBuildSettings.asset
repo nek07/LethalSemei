@@ -8,12 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Infima Games/Low Poly Shooter Pack - Free Sample/Scenes/S_Content_Overview.unity
     guid: 63fdc04a097eb0b4ba4af78a98dac40d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/main menu.unity
     guid: c5f321253280a004086799a4134965e7
-  - enabled: 1
-    path: Assets/map.unity
+  - enabled: 0
+    path: Assets/Scenes/map.unity
     guid: d186fd0cd6be56d49a5d7f432a3bda98
+  - enabled: 1
+    path: Assets/Scenes/Network stuff/offline scene.unity
+    guid: b52085945985bc64faeed6f8dee4b4b8
+  - enabled: 1
+    path: Assets/Scenes/Network stuff/rake online.unity
+    guid: 040e1a511be265c4a908e9c6d315fde9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9eb07e2d669e9c94e9d7d3c782a916f7,
       type: 2}

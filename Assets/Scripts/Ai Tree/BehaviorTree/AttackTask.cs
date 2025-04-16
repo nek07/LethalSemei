@@ -13,36 +13,46 @@ public class AttackTask : BTNode
 
     public override bool Evaluate()
     {
+        if (enemy.player == null)
+        {
+            enemy.SetAttack(false);
+            return false;
+        }
+
         float distance = Vector3.Distance(enemy.transform.position, enemy.player.position);
 
         if (distance <= enemy.attackRange)
         {
             // Поворачиваем NPC в сторону игрока
             Vector3 direction = enemy.player.position - enemy.transform.position;
-            direction.y = 0; // Игнорируем вертикальную составляющую
-            if (direction.magnitude > 0.1f) // Если направление отличается от текущего положения
+            direction.y = 0;
+
+            if (direction.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, Time.deltaTime * 5f); // Плавный поворот
+                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, Time.deltaTime * 5f);
             }
 
             enemy.agent.ResetPath();
-            enemy.SetAttack(true);  // Включаем анимацию атаки
-            
+            enemy.SetAttack(true);
+
             if (Time.time - lastAttackTime >= enemy.attackCooldown)
             {
                 lastAttackTime = Time.time;
                 TryAttack();
             }
+
             return true;
         }
         else
         {
-            enemy.SetAttack(false);  // Отключаем атаку
+            // Игрок ушёл – сбрасываем атаку и позволяем BT переключиться на погоню
+            enemy.SetAttack(false);
+            return false;
         }
-
-        return false;
     }
+
+
     
     private void TryAttack()
     {
