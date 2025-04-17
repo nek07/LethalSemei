@@ -504,7 +504,6 @@ GameObject:
   - component: {fileID: 6264612175302592783}
   - component: {fileID: 2058370243813171775}
   - component: {fileID: 7669364683058496824}
-  - component: {fileID: 8906240726510338570}
   m_Layer: 0
   m_Name: Character v2
   m_TagString: Untagged
@@ -569,9 +568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b059597b70f845f48a4c6dd91f107a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   canMove: 1
   canSprint: 1
   canJump: 1
@@ -821,23 +817,6 @@ MonoBehaviour:
   throwKey: 103
   pickUpKey: 101
   pickUpDistance: 1.5
---- !u!114 &8906240726510338570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652744830769609727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 1604117011
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!1 &1658351558530315580
 GameObject:
   m_ObjectHideFlags: 0

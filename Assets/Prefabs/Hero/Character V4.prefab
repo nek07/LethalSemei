@@ -497,8 +497,8 @@ GameObject:
   - component: {fileID: -3339641952633216392}
   - component: {fileID: 3093615534622313657}
   - component: {fileID: 7269113031611560342}
-  - component: {fileID: -9041441623174933306}
-  - component: {fileID: 9200477590861551126}
+  - component: {fileID: -9199329279369785854}
+  - component: {fileID: -5808689383878988146}
   m_Layer: 0
   m_Name: Character V4
   m_TagString: Untagged
@@ -883,7 +883,7 @@ MonoBehaviour:
   rotationInterpolationSpeed: 10
   teleportDistanceMultiplier: 10
   reduceSendsWhileIdle: 1
---- !u!114 &-9041441623174933306
+--- !u!114 &-9199329279369785854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -904,7 +904,7 @@ MonoBehaviour:
   canCrouch: 1
   canUseHeadBob: 1
   willSlideOnSlopes: 1
-  useFootsteps: 0
+  useFootsteps: 1
   sprintKey: 304
   jumpKey: 32
   crouchKey: 306
@@ -937,7 +937,7 @@ MonoBehaviour:
   crouchStepMultipler: 1.5
   sprintStepMultipler: 0.6
   runAudioSource: {fileID: 9103066456348731753}
---- !u!114 &9200477590861551126
+--- !u!114 &-5808689383878988146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -3540,9 +3540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcede59498d4e94ab540b84cf117428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   animator: {fileID: 6215960621206388935}
   locomotionBlendSpeed: 10
 --- !u!114 &8911648319765466691

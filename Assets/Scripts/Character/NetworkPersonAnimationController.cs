@@ -6,7 +6,7 @@ public class NetworkPersonAnimationController : NetworkBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float locomotionBlendSpeed = 1f;
 
-    private FirstPersonController firstPersonController;
+    private NetworkFirstPersonController  networkFirstPersonController;
     private PlayerState playerState;
     private CharacterController characterController;
 
@@ -21,7 +21,7 @@ public class NetworkPersonAnimationController : NetworkBehaviour
 
     private void Awake()
     {
-        firstPersonController = GetComponent<FirstPersonController>();
+        networkFirstPersonController = GetComponent<NetworkFirstPersonController>();
         playerState = GetComponent<PlayerState>();
         characterController = GetComponent<CharacterController>();
     }
@@ -55,7 +55,7 @@ public class NetworkPersonAnimationController : NetworkBehaviour
         bool isJumping = playerState.CurrentPlayerMovementState == PlayerMovementState.Jumping;
         bool isFalling = playerState.CurrentPlayerMovementState == PlayerMovementState.Falling;
 
-        Vector2 inputTarget = firstPersonController.PlayerInput;
+        Vector2 inputTarget = networkFirstPersonController.PlayerInput;
         currentBlendInput = Vector3.Lerp(currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
 
         animator.SetBool(isCrouchHash, isCrouching);
