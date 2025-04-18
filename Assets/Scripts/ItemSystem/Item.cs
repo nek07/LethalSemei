@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = System.Random;
 
 namespace ItemSystem
 {
@@ -10,12 +11,23 @@ namespace ItemSystem
         public CharacterAnimController characterAnimController;
         public bool isIntreactable = true;
 
+        public int price;
+        public int radiation;
+
+        private Random random;
         public Item(ItemSO itemSO, Rigidbody rb, CharacterAnimController characterAnimController, bool isIntreactable)
         {
             this.itemSO = itemSO;
             this.rb = rb;
             this.characterAnimController = characterAnimController;
             this.isIntreactable = isIntreactable;
+        }
+
+        private void Awake()
+        {
+            random = new Random();
+            price = random.Next(itemSO.minPrice, itemSO.maxPrice);
+            radiation = random.Next(itemSO.minRadiation, itemSO.maxRadiation);
         }
 
         public void SetCharacterAnimController(CharacterAnimController characterAnimController)

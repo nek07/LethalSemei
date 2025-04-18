@@ -12,6 +12,13 @@ public class ItemSO : ScriptableObject
     public Quaternion itemRotationOffset;
     public ItemType type;
     
+    [Header("Market Info")]
+    public int minPrice;
+    public int maxPrice;
+    public int minRadiation;
+    public int maxRadiation;
+    
+    
     [Header("IK position (skip if dont need)")]
     public Vector3 rightHandPosition;
     public Quaternion rightHandRotation;
