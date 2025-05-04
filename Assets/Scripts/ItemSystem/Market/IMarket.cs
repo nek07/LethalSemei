@@ -6,7 +6,8 @@ namespace ItemSystem.Market
     {
         public void Sell(Item item);
         public void SellItems();
-        public bool Buy(Item item);
+        public bool Buy(string itemName);
         public List<Item> GetItems();
+        public void OpenShop();
     }
 }

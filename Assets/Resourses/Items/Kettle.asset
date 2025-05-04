@@ -17,5 +17,9 @@ MonoBehaviour:
   itemPositionOffset: {x: 0.0008, y: 0.00035, z: 0.00113}
   itemRotationOffset: {x: -0.6433408, y: 0.6430263, z: -0.29372203, w: -0.2938658}
   type: 1
+  minPrice: 1000
+  maxPrice: 10000
+  minRadiation: 10
+  maxRadiation: 50
   rightHandPosition: {x: 0, y: 0, z: 0}
   rightHandRotation: {x: -0.21139568, y: 0.41428143, z: 0.65621215, w: 0.5941956}

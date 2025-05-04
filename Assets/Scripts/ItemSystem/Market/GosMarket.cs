@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ItemSystem.Market
@@ -28,6 +29,26 @@ namespace ItemSystem.Market
             Instantiate(item, spawnPoint.position, Quaternion.identity);
             return true;
         }
+        
+        public bool Buy(string itemName)
+        {
+            // Ищем предмет по имени в списке items
+            Item item = items.FirstOrDefault(i => i.itemSO.itemName == itemName);
+    
+            // Если не найден — выходим
+            if (item == null)
+                return false;
+
+            if (!TeamManager.Instance.TrySpendMoney(item.price))
+                return false;
+            
+            Instantiate(item, spawnPoint.position, Quaternion.identity);
+
+            items.Remove(item);
+            Destroy(item);
+
+            return true;
+        }
 
         public void Sell(Item item)
         {
@@ -53,7 +74,11 @@ namespace ItemSystem.Market
         {
             return items;
         }
-        
+
+        public void OpenShop()
+        {
+            
+        }
         
         private void OnTriggerEnter(Collider other)
         {

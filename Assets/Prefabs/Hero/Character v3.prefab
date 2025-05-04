@@ -3611,6 +3611,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5717068407303190454}
   interactionDistance: 2
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 131062
   interactionText: {fileID: 1405988202408308972}
 --- !u!1 &8595679960549520819
 GameObject:

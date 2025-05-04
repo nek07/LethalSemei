@@ -10,6 +10,7 @@ namespace ItemSystem
         public Rigidbody rb;
         public CharacterAnimController characterAnimController;
         public bool isIntreactable = true;
+        public bool onTheShowcase = false;
 
         public int price;
         public int radiation;
@@ -23,7 +24,7 @@ namespace ItemSystem
             this.isIntreactable = isIntreactable;
         }
 
-        private void Awake()
+        private void Start()
         {
             random = new Random();
             price = random.Next(itemSO.minPrice, itemSO.maxPrice);
@@ -73,6 +74,10 @@ namespace ItemSystem
         public bool isInteractable()
         {
             return isIntreactable;
+        }
+
+        public void Interact(Camera camera)
+        {
         }
     }
 }
