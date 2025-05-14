@@ -56,8 +56,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.30458307, y: 0.07392508, z: 0.7295251}
-  m_Center: {x: 0.037869453, y: 0.0086066425, z: 0.052735925}
+  m_Size: {x: 0.30458307, y: 0.12629013, z: 0.72952515}
+  m_Center: {x: 0.03786945, y: 0.00010322158, z: 0.052735955}
 --- !u!114 &3809349085901319443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +74,9 @@ MonoBehaviour:
   rb: {fileID: 7640770955637584218}
   characterAnimController: {fileID: 0}
   isIntreactable: 1
+  onTheShowcase: 0
+  price: 0
+  radiation: 0
 --- !u!54 &7640770955637584218
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -286,7 +286,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -779,6 +779,9 @@ MonoBehaviour:
   itemHolder: {fileID: 3513220989244231297}
   rightHand: {fileID: 725328063362382763}
   rightHandRig: {fileID: 1340254187764833171}
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 131063
   throwKey: 103
   pickUpKey: 101
   pickUpDistance: 2

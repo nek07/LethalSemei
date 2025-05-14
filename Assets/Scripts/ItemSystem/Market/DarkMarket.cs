@@ -49,7 +49,7 @@ namespace ItemSystem.Market
         public bool Buy(string itemName)
         {
             // Ищем предмет по имени в списке items
-            Item item = items.First(i => i.itemSO.itemName == itemName);
+            Item item = items.FirstOrDefault(i => i.itemSO.itemName == itemName);
     
             // Если не найден — выходим
             if (item == null)
@@ -61,7 +61,7 @@ namespace ItemSystem.Market
             Instantiate(item, spawnPoint.position, Quaternion.identity);
 
             items.Remove(item);
-            Destroy(item);
+            /*Destroy(item);*/
 
             return true;
         }

@@ -16,6 +16,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Transform itemHolder;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private TwoBoneIKConstraint rightHandRig;
+    [SerializeField] private LayerMask pickableLayer;
     
     [Space(10)]
     [Header("Keys")]
@@ -198,12 +199,13 @@ public class PlayerInventory : MonoBehaviour
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, pickUpDistance))
+        if (Physics.Raycast(ray, out hit, pickUpDistance, pickableLayer))
         {
             if (hit.collider.TryGetComponent(out IPickable pickableItem))
             {
-                if(!AddItem(pickableItem.GetItem()))
+                if (!AddItem(pickableItem.GetItem()))
                     return;
+
                 pickableItem.OnPickItem();
             }
         }
