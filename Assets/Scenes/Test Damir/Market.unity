@@ -4906,6 +4906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipes_set_v1_V_set_v1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010521890458, guid: 5222f7f213505a24881db771cd3afa9e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011120171334, guid: 5222f7f213505a24881db771cd3afa9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.84764886

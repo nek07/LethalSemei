@@ -10,6 +10,9 @@ public class ChaseTask : BTNode
 
         public override bool Evaluate()
         {
+            if(enemy.agent.isStopped)
+                enemy.agent.isStopped = false;
+            
             float distance = Vector3.Distance(enemy.transform.position, enemy.player.position);
 
             float buffer = 2f;
