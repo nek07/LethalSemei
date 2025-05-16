@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ComputerInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] private Transform computerViewPoint;  // Точка, где будет камера
     [SerializeField] private float transitionDuration = 1.0f;  // Время перемещения
     [SerializeField] private MonoBehaviour[] functions;
+    [SerializeField] private string interactionText = "Press F to interact with the computer";
+    [SerializeField] private UIKeyboardNavigation navigation;
 
     private Camera playerCamera;
     private CinemachineBrain cinemachineBrain;
@@ -28,7 +31,7 @@ public class ComputerInteraction : MonoBehaviour, IInteractable
 
     public string GetTextInteraction()
     {
-        return "Use computer";
+        return interactionText;
     }
 
     public bool isInteractable()
@@ -48,7 +51,10 @@ public class ComputerInteraction : MonoBehaviour, IInteractable
     {
         isTransitioning = true;
         inComputer = true;
-
+        
+        EventSystem.current.SetSelectedGameObject(null);
+        navigation.enabled = true;
+        navigation.ActivateButtons();
         if (cinemachineBrain != null)
             cinemachineBrain.enabled = false;
 
@@ -57,9 +63,7 @@ public class ComputerInteraction : MonoBehaviour, IInteractable
         
         foreach (MonoBehaviour function in functions)
             function.enabled = true;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
 
         originalPosition = playerCamera.transform.position;
         originalRotation = playerCamera.transform.rotation;
@@ -111,14 +115,15 @@ public class ComputerInteraction : MonoBehaviour, IInteractable
         if (cinemachineBrain != null)
             cinemachineBrain.enabled = true;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         foreach (MonoBehaviour function in functions)
             function.enabled = false;
         
 
         inComputer = false;
         isTransitioning = false;
+        
+        EventSystem.current.SetSelectedGameObject(null);
+        navigation.DiactivateButtons();
+        navigation.enabled = false;
     }
 }

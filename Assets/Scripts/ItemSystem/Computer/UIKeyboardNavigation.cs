@@ -45,4 +45,22 @@ public class UIKeyboardNavigation : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(buttons[selectedIndex].gameObject);
     }
+    
+    public void ActivateButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            button.interactable = true;
+            button.navigation = Navigation.defaultNavigation;
+        }
+    }
+
+    public void DiactivateButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            button.interactable = false;
+            button.navigation = Navigation.defaultNavigation;
+        }
+    }
 }
