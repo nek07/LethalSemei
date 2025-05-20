@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b15ae0bc089ae4594afec101e68731, type: 3}
+  m_Name: Vase
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: baa980fc916240a429c3cba6fcbdb393, type: 3}
+  itemName: Vase
+  itemPositionOffset: {x: 0.004, y: -0.001, z: 0.002}
+  itemRotationOffset: {x: -0.05630794, y: 0.020544484, z: 0.56252056, w: 0.82460773}
+  type: 1
+  minPrice: 6000
+  maxPrice: 10000
+  minRadiation: 10
+  maxRadiation: 500
+  rightHandPosition: {x: 0, y: 0, z: 0}
+  rightHandRotation: {x: 0, y: 0, z: 0, w: 0}

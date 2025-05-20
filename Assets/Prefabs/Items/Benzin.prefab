@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9002338046808789361}
   - component: {fileID: 9124502377074380053}
   - component: {fileID: 8072781844933689656}
-  - component: {fileID: 8345630325006076058}
   - component: {fileID: 8525185026697388653}
   m_Layer: 0
   m_Name: Benzin
@@ -55,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.40012646, y: 0.42033315, z: 0.16084328}
-  m_Center: {x: -0.021077871, y: 0.20683536, z: -0.014045641}
+  m_Size: {x: 0.26723742, y: 0.42033315, z: 0.16084328}
+  m_Center: {x: -0.016501784, y: 0.20683536, z: -0.014045641}
 --- !u!114 &8072781844933689656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,27 +75,6 @@ MonoBehaviour:
   onTheShowcase: 0
   price: 0
   radiation: 0
---- !u!65 &8345630325006076058
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7050784179793683106}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.74034595, y: 0.55975556, z: 0.35355124}
-  m_Center: {x: -0.030261993, y: 0.22012222, z: -0.00095562637}
 --- !u!54 &8525185026697388653
 Rigidbody:
   m_ObjectHideFlags: 0
