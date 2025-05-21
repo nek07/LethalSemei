@@ -16,7 +16,6 @@ MonoBehaviour:
   itemName: Axe
   itemPositionOffset: {x: -0.0019, y: 0.0004, z: 0.0004}
   itemRotationOffset: {x: 0.1830127, y: 0.68301266, z: 0.1830127, w: 0.68301266}
-  type: 1
-  itemScale: {x: 1, y: 1, z: 1}
+  type: 0
   rightHandPosition: {x: 0, y: 0, z: 0}
   rightHandRotation: {x: 0, y: 0, z: 0, w: 0}

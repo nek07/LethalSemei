@@ -1,22 +1,7 @@
-﻿using UnityEngine;
-
-public class UIManager : MonoBehaviour
+﻿namespace Menu
 {
-    [Header("Panels")]
-    public GameObject mainMenuPanel;
-    public GameObject joinGamePanel;
-
-    // Вызывается по клику на кнопку Join Game в главном меню
-    public void ShowJoinGame()
+    public class UIManager
     {
-        mainMenuPanel.SetActive(false);
-        joinGamePanel.SetActive(true);
-    }
-
-    // Вызывается по клику на кнопку Back внутри окна Join Game
-    public void HideJoinGame()
-    {
-        joinGamePanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
+        
     }
 }

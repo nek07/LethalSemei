@@ -5,7 +5,7 @@ using UnityEngine;
 namespace NTC.Global.System
 {
 
-    public class NetworkHealthSystem : NetworkBehaviour, IDamagable
+    public class HealthSystem : NetworkBehaviour, IDamagable
     {
         [SyncVar(hook = nameof(OnHealthChanged))]
         private float health = 100f;

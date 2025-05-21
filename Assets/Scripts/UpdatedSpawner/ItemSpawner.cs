@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Mirror;
 using UnityEngine;
 
 namespace UpdatedSpawner
 {
-    public class ItemSpawner : NetworkBehaviour
+    public class ItemSpawner : MonoBehaviour
     {
         public List<SpawnableItem> items;
         public List<Transform> spawnPoints;
@@ -18,11 +17,11 @@ namespace UpdatedSpawner
             { Rarity.SuperRare, 5 }
         };
 
-        public override void OnStartServer()
+        void Start()
         {
-            SpawnItems();      // (СЕТЬ) сервер создаёт предметы
+            SpawnItems();
         }
-        [Server]
+
         void SpawnItems()
         {
             int remainingBudget = budget;
@@ -54,7 +53,6 @@ namespace UpdatedSpawner
                 Debug.Log("Спавним: " + selectedItem.prefab.name + " за $" + selectedItem.price);
 
                 GameObject obj = ObjectPooler.Instance.SpawnFromPool(selectedItem.prefab.name, spawnPoint.position, spawnPoint.rotation);
-                
                 if (obj == null)
                 {
                     Debug.LogError("Объект из пула не найден: " + selectedItem.prefab.name);

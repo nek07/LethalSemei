@@ -42,5 +42,4 @@ public interface IInteractable
 {
     string GetTextInteraction();
     bool isInteractable();
-    void Interact(Camera camera);
 }

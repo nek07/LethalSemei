@@ -7568,7 +7568,6 @@ GameObject:
   - component: {fileID: 1306643748858026474}
   - component: {fileID: 1866143350466555781}
   - component: {fileID: 8334375848317043899}
-  - component: {fileID: -5097834153544986314}
   m_Layer: 7
   m_Name: Room
   m_TagString: Untagged
@@ -7637,23 +7636,6 @@ MonoBehaviour:
   - {fileID: 4640260162475729789}
   colliders:
   - {fileID: 1866143350466555781}
---- !u!114 &-5097834153544986314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702650064921756479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 4037719767
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!1 &1261114698686393249
 GameObject:
   m_ObjectHideFlags: 0

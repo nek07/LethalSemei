@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 5423729061058254561}
   - component: {fileID: 5871362768736150806}
   - component: {fileID: 9076479231418224772}
-  - component: {fileID: -830536794905497988}
   m_Layer: 7
   m_Name: Corridor
   m_TagString: Untagged
@@ -156,23 +155,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.647669, y: 3.7272894, z: 10.53153}
   m_Center: {x: 1.8920212, y: 1.9089082, z: -5.1950216}
---- !u!114 &-830536794905497988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961838221174491524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 4008965156
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
 --- !u!1 &7150696908648486917
 GameObject:
   m_ObjectHideFlags: 0

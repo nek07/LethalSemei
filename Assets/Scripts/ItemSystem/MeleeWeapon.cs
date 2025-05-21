@@ -47,6 +47,7 @@ public class MeleeWeapon : Item
     public override void Update()
     {
         base.Update();
+        Debug.Log("UPDate update " + active);
         if (!active)
         {
             return;
