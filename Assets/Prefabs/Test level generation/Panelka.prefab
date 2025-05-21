@@ -48,11 +48,13 @@ MonoBehaviour:
   doorPrefabs:
   - {fileID: 91111306553405595, guid: 0cdc1a6c5d2db334085c386f5667f4c9, type: 3}
   stairsPrefabs:
-  - {fileID: 1496409850046431836, guid: 3d7a1bba2aeffa842a755afe0055b2cf, type: 3}
+  - {fileID: 3333918101854877412, guid: c8dbc698cdb4f874f879a7be5b8bc5fb, type: 3}
   fullWallPrefabs:
   - {fileID: 3375755586134083071, guid: 341364a1724b5fe46b9f63f88e1a12c6, type: 3}
   bacloniesPrefabs:
   - {fileID: 1496409850046431836, guid: 3d7a1bba2aeffa842a755afe0055b2cf, type: 3}
+  - {fileID: 1622417022724809650, guid: 60e73b17f9d02d243bb5ad219d877edf, type: 3}
+  - {fileID: 8835887303362646233, guid: c0e393e2e73f5244f9efbc6613d290ba, type: 3}
   lowerWallPrefab: {fileID: 7407447655739962039, guid: 3426552c25462fa48bdfc834bfa1efac,
     type: 3}
   upperWallPrefab: {fileID: 3375755586134083071, guid: 341364a1724b5fe46b9f63f88e1a12c6,

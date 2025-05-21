@@ -210,7 +210,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 65015
+    m_Bits: 65023
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   interactionDistance: 2
   interactionMask:
     serializedVersion: 2
-    m_Bits: 131063
+    m_Bits: 131071
   interactionText: {fileID: 2846630002647229703}
 --- !u!114 &4008944435499784690
 MonoBehaviour:
@@ -777,7 +777,7 @@ MonoBehaviour:
   rightHandRig: {fileID: 1340254187764833171}
   pickableLayer:
     serializedVersion: 2
-    m_Bits: 131063
+    m_Bits: 131071
   throwKey: 103
   pickUpKey: 101
   pickUpDistance: 2

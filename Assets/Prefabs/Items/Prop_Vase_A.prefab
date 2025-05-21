@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5115965661319296387}
   - component: {fileID: 2168730808687521676}
   - component: {fileID: 2592852698597057627}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Prop_Vase_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

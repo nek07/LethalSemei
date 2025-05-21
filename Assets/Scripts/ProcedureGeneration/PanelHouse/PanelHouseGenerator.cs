@@ -58,8 +58,8 @@ public class PanelHouseGenerator : MonoBehaviour
             startPoint = gameObject.transform;
         }
         
-        StartGeneration();
-        tr = new GameObject().transform;
+        //StartGeneration();
+        /*tr = new GameObject().transform;*/
     }
 
     private PanelGenerateType GetRandomPanelType()
@@ -72,7 +72,7 @@ public class PanelHouseGenerator : MonoBehaviour
         return values[randomIndex];
     }
 
-    private void StartGeneration()
+    public void StartGeneration()
     {
         if (panelType == PanelGenerateType.Classic)
         {
@@ -270,6 +270,21 @@ public class PanelHouseGenerator : MonoBehaviour
         Renderer renderer = prefab.GetComponentInChildren<Renderer>();
         return renderer ? renderer.bounds.size : Vector3.zero;
     }
+   
+    public Bounds GetHouseBounds()
+    {
+        var renderers = GetComponentsInChildren<Renderer>();
+        if (renderers.Length == 0) return new Bounds(transform.position, Vector3.zero);
+
+        Bounds bounds = renderers[0].bounds;
+        foreach (Renderer r in renderers)
+        {
+            bounds.Encapsulate(r.bounds);
+        }
+
+        return bounds;
+    }
+
 
 }
 
