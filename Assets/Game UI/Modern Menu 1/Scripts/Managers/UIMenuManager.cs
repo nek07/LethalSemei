@@ -121,10 +121,6 @@ namespace SlimUI.ModernMenu{
 			exitMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			playMenu.SetActive(true);
-			
-		}
-		public void NewGame(){
-			SceneManager.LoadScene("map");
 		}
 		
 		public void PlayCampaignMobile(){
@@ -132,7 +128,6 @@ namespace SlimUI.ModernMenu{
 			if(extrasMenu) extrasMenu.SetActive(false);
 			playMenu.SetActive(true);
 			mainMenu.SetActive(false);
-			 
 		}
 
 		public void ReturnMenu(){

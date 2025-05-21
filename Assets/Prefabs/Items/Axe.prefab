@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6374826838342655306}
   - component: {fileID: 5514268097096496565}
-  - component: {fileID: 3809349085901319443}
   - component: {fileID: 7640770955637584218}
+  - component: {fileID: 2473950718371903827}
+  - component: {fileID: 5685441408986067218}
+  - component: {fileID: 2837013691106414396}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -58,22 +60,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.30458307, y: 0.07392508, z: 0.7295251}
   m_Center: {x: 0.037869453, y: 0.0086066425, z: 0.052735925}
---- !u!114 &3809349085901319443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451727258380968999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3892380d9c0ee0d4b8aa79477a6954ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSO: {fileID: 11400000, guid: ed248739a4ffe724798bcb6278df04c3, type: 2}
-  rb: {fileID: 7640770955637584218}
-  characterAnimController: {fileID: 0}
-  isIntreactable: 1
 --- !u!54 &7640770955637584218
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -101,6 +87,74 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2473950718371903827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451727258380968999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd935112313f4b7c8c36d10e66e19d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  itemSO: {fileID: 11400000, guid: ed248739a4ffe724798bcb6278df04c3, type: 2}
+  rb: {fileID: 7640770955637584218}
+  characterAnimController: {fileID: 0}
+--- !u!114 &5685441408986067218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451727258380968999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1458267127
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &2837013691106414396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451727258380968999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b20dc110904e47f8a154cdcf6433eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 6374826838342655306}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  bufferResetMultiplier: 3
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!1 &2777513427015643086
 GameObject:
   m_ObjectHideFlags: 0

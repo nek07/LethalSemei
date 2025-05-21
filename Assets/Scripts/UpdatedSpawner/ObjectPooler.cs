@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace UpdatedSpawner
 {
-    public class ObjectPooler : MonoBehaviour
+    public class ObjectPooler : NetworkBehaviour
     {
         [System.Serializable]
         public class PoolItem
@@ -18,7 +19,7 @@ namespace UpdatedSpawner
 
         public static ObjectPooler Instance;
 
-        void Awake()
+        public override void OnStartServer()      // (СЕТЬ) заменяем Awake
         {
             Instance = this;
             poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -26,10 +27,11 @@ namespace UpdatedSpawner
             foreach (var item in itemsToPool)
             {
                 Queue<GameObject> objectPool = new Queue<GameObject>();
+
                 for (int i = 0; i < item.size; i++)
                 {
                     GameObject obj = Instantiate(item.prefab);
-                    obj.SetActive(false);
+                    obj.SetActive(false);         // пока в “пустоте”
                     objectPool.Enqueue(obj);
                 }
 
@@ -39,17 +41,18 @@ namespace UpdatedSpawner
 
         public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
         {
+            if (!NetworkServer.active) return null;     // (СЕТЬ) только сервер
             if (!poolDictionary.ContainsKey(tag)) return null;
 
             GameObject obj = poolDictionary[tag].Dequeue();
 
-            obj.SetActive(true);
             obj.transform.position = position;
             obj.transform.rotation = rotation;
+            obj.SetActive(true);
 
+            NetworkServer.Spawn(obj);                  // разослать клиентам
             poolDictionary[tag].Enqueue(obj);
             return obj;
         }
-
     }
 }
