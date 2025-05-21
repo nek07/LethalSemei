@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BunkerGenerator : MonoBehaviour
+public class BunkerGenerator : NetworkBehaviour
 {
     [SerializeField] private GameObject entrance;
     [SerializeField] private List<GameObject> rooms;
@@ -18,25 +19,31 @@ public class BunkerGenerator : MonoBehaviour
     private List<GenLevelPart> generatedRooms;
     public bool isGenerated = false;
 
-    private void Start()
+    public override void OnStartServer()
     {
 
         generatedRooms = new List<GenLevelPart>();
         StartGeneration();
     }
     
-   
+
+    [Server]
     public void StartGeneration()
     {
-        Debug.Log("Starting generation...");
-        Generate();
-        //GenerateAlternateEntrances();
+        Debug.Log("Starting generation…");
+        Generate();                        // внутри Generate() будем спавнить всё сетевым образом
+        //GenerateAlternateEntrances();    // если нужно, не забудьте тоже обернуть [Server]
         isGenerated = true;
         Debug.Log("Generation finished.");
-        gameObject.SetActive(false);
-        
-    }
 
+        /*--------------------------------------------------------------
+         * 3) Не выключайте сам GameObject — иначе сцена-объект исчезнет
+         *    у поздно подключившихся клиентов. Лучше просто:
+         *           enabled = false;   // чтобы скрипт перестал тикать
+         *-------------------------------------------------------------*/
+        gameObject.SetActive(false);
+    }
+    [Server]
     private void Generate()
     {
         for (int i = 0; i < maxCountRooms - alternateEntrances.Count; i++)
@@ -46,7 +53,7 @@ public class BunkerGenerator : MonoBehaviour
             {
                 GameObject generatedRoom = Instantiate(entrance, transform.position, transform.rotation);
                 Debug.Log("Entrance room generated.");
-
+                NetworkServer.Spawn(generatedRoom);  //here netw
                 generatedRoom.transform.SetParent(null);
                 if (generatedRoom.TryGetComponent<GenLevelPart>(out GenLevelPart genLevelPart))
                 {
@@ -89,6 +96,7 @@ public class BunkerGenerator : MonoBehaviour
                 {
                     int randomIndex = Random.Range(0, hallways.Count);
                     GameObject generatedHallway = Instantiate(hallways[randomIndex], transform.position, transform.rotation);
+                    NetworkServer.Spawn(generatedHallway);  //here network
                     Debug.Log($"Hallway {randomIndex} generated.");
 
                     generatedHallway.transform.SetParent(null);
@@ -137,6 +145,7 @@ public class BunkerGenerator : MonoBehaviour
                         generatedRoom = Instantiate(rooms[randomIndex], transform.position, transform.rotation);
                         Debug.Log($"Room {randomIndex} generated.");
                     }
+                    NetworkServer.Spawn(generatedRoom);   // ← обязательный вызов
 
                     generatedRoom.transform.SetParent(null);
 

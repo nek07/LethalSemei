@@ -13,6 +13,18 @@ PrefabInstance:
       value: Kettle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.51255184
       objectReference: {fileID: 0}
@@ -52,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6400000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -63,11 +79,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d2869bfcb17962c42802809e8a9b2ffb,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 237201691695234517}
+      addedObject: {fileID: 8358791378079897163}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d2869bfcb17962c42802809e8a9b2ffb,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8358791378079897163}
+      addedObject: {fileID: 8348449516587278118}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d2869bfcb17962c42802809e8a9b2ffb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1312127642895198291}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d2869bfcb17962c42802809e8a9b2ffb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6985178255277690072}
   m_SourcePrefab: {fileID: 100100000, guid: d2869bfcb17962c42802809e8a9b2ffb, type: 3}
 --- !u!1 &742065065763267602 stripped
 GameObject:
@@ -75,22 +99,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 742065065763168946}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &237201691695234517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742065065763267602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa81fd6b7f03fe4dbf5885bdb0116f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSO: {fileID: 11400000, guid: 6f4f316501826f0428cc28d5f76e969a, type: 2}
-  rb: {fileID: 8358791378079897163}
-  characterAnimController: {fileID: 0}
-  isIntreactable: 1
 --- !u!54 &8358791378079897163
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,3 +126,77 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8348449516587278118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742065065763267602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 186333608
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &1312127642895198291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742065065763267602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 742065065763305522}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &6985178255277690072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742065065763267602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd935112313f4b7c8c36d10e66e19d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  itemSO: {fileID: 11400000, guid: 6f4f316501826f0428cc28d5f76e969a, type: 2}
+  rb: {fileID: 8358791378079897163}
+  characterAnimController: {fileID: 0}
+--- !u!4 &742065065763305522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: d2869bfcb17962c42802809e8a9b2ffb,
+    type: 3}
+  m_PrefabInstance: {fileID: 742065065763168946}
+  m_PrefabAsset: {fileID: 0}

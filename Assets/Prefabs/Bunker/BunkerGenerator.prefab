@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3940555738257823899}
   - component: {fileID: 7416253664165203428}
+  - component: {fileID: 4262894964487145882}
   m_Layer: 0
   m_Name: BunkerGenerator
   m_TagString: Untagged
@@ -44,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87faa05d3731a44bb535b9721e80bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   entrance: {fileID: 2019337100828467265, guid: a6aecaebbdc6d3c4a9142db7b092564c,
     type: 3}
   rooms:
@@ -62,3 +66,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isGenerated: 0
+--- !u!114 &4262894964487145882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216210976131733101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 221716583
+  serverOnly: 1
+  visibility: 0
+  hasSpawned: 0
