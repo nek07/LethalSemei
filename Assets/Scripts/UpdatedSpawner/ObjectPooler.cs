@@ -19,7 +19,7 @@ namespace UpdatedSpawner
 
         public static ObjectPooler Instance;
 
-        public override void OnStartServer()      // (СЕТЬ) заменяем Awake
+        public override void OnStartServer()    
         {
             Instance = this;
             poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -31,7 +31,7 @@ namespace UpdatedSpawner
                 for (int i = 0; i < item.size; i++)
                 {
                     GameObject obj = Instantiate(item.prefab);
-                    obj.SetActive(false);         // пока в “пустоте”
+                    obj.SetActive(false);         
                     objectPool.Enqueue(obj);
                 }
 
@@ -41,7 +41,7 @@ namespace UpdatedSpawner
 
         public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
         {
-            if (!NetworkServer.active) return null;     // (СЕТЬ) только сервер
+            if (!NetworkServer.active) return null;     
             if (!poolDictionary.ContainsKey(tag)) return null;
 
             GameObject obj = poolDictionary[tag].Dequeue();
@@ -50,7 +50,7 @@ namespace UpdatedSpawner
             obj.transform.rotation = rotation;
             obj.SetActive(true);
 
-            NetworkServer.Spawn(obj);                  // разослать клиентам
+            NetworkServer.Spawn(obj);                  
             poolDictionary[tag].Enqueue(obj);
             return obj;
         }

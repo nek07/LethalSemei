@@ -286,7 +286,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -723,6 +723,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentPlayerMovementState>k__BackingField: 0
+--- !u!114 &3720573794947322573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190392068012011818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affd25f0c3824cd898610532c163e5a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 4306572128868939988}
+  interactionDistance: 2
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 131063
+  interactionText: {fileID: 1319153939743337566}
+--- !u!114 &4008944435499784690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190392068012011818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea84285c73cf4544a44753d834186cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  hitVFX: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+  animator: {fileID: 5927093223636383542}
+  ragdoll: {fileID: 1001046624943213039}
 --- !u!114 &7507493467066285690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,6 +780,9 @@ MonoBehaviour:
   itemHolder: {fileID: 3513220989244231297}
   rightHand: {fileID: 725328063362382763}
   rightHandRig: {fileID: 1340254187764833171}
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 131063
   throwKey: 103
   pickUpKey: 101
   pickUpDistance: 2

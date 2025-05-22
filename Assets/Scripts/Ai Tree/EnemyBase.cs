@@ -46,6 +46,7 @@ public abstract class EnemyBase : MonoBehaviour, IDieable
     private void SetPatrolDestination()
     {
         // Устанавливаем точку назначения для NavMeshAgent
+        agent.isStopped = false;
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
     }
 
@@ -57,6 +58,11 @@ public abstract class EnemyBase : MonoBehaviour, IDieable
     public void SetAttack(bool isAttacking)
     {
         animator.SetBool("IsAttacking", isAttacking);
+    }
+    
+    public void StopMovement()
+    {
+        agent.isStopped = true;
     }
 
     public void Die()

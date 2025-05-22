@@ -56,9 +56,11 @@ public class AttackTask : BTNode
     
     private void TryAttack()
     {
+        
         IDamagable target = enemy.player.GetComponent<IDamagable>();
         if (target != null)
         {
+            Debug.Log("Попытка атаки");
             target.TakeDamage(enemy.attackDamage);
             target.HitVFX(enemy.player.transform.position);
         }

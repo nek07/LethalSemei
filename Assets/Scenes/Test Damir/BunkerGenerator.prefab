@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2332849683984021745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1371492883643510933}
+  - component: {fileID: 189008056810534145}
+  - component: {fileID: 5950192623655837429}
+  m_Layer: 0
+  m_Name: BunkerGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1371492883643510933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332849683984021745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.868334, y: -500, z: -17.571396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189008056810534145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332849683984021745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87faa05d3731a44bb535b9721e80bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  entrance: {fileID: 2019337100828467265, guid: a6aecaebbdc6d3c4a9142db7b092564c,
+    type: 3}
+  rooms:
+  - {fileID: 4961838221174491524, guid: 38446225f90d752409e986c90586156a, type: 3}
+  - {fileID: 702650064921756479, guid: 5fbf00795b88d4e49bc700b6bd2af1cd, type: 3}
+  - {fileID: 702650064921756479, guid: 5fbf00795b88d4e49bc700b6bd2af1cd, type: 3}
+  - {fileID: 702650064921756479, guid: 5fbf00795b88d4e49bc700b6bd2af1cd, type: 3}
+  specialRooms:
+  - {fileID: 0}
+  alternateEntrances: []
+  hallways:
+  - {fileID: 4961838221174491524, guid: 38446225f90d752409e986c90586156a, type: 3}
+  door: {fileID: 9023140554910300181, guid: 51ced65f354c41a4c8ffc300fb1af2cb, type: 3}
+  maxCountRooms: 200
+  roomsLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  isGenerated: 0
+--- !u!114 &5950192623655837429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332849683984021745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 221716583
+  serverOnly: 1
+  visibility: 0
+  hasSpawned: 0

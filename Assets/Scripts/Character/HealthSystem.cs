@@ -33,10 +33,18 @@ public class HealthSystem : MonoBehaviour, IDamagable
  
     void Die()
     {
-        Debug.Log("Umer kak loh");
-        animator.enabled = false;
-        ragdoll.EnableRagdoll();
         controller.Die();
+        try
+        {
+            animator.enabled = false;
+            ragdoll.EnableRagdoll();
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+        
+        
     }
     public void HitVFX(Vector3 hitPosition)
     {
