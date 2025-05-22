@@ -7,6 +7,7 @@ namespace ItemSystem
     {
         public Light flashlight;
         public KeyCode toggleKey = KeyCode.F;
+        [SerializeField] private AudioSource flashlightSound; 
 
         public FlashlightItem(ItemSO itemSO, Rigidbody rb, CharacterAnimController characterAnimController, bool isIntreactable, Light flashlight, KeyCode toggleKey) : base(itemSO, rb, characterAnimController, isIntreactable)
         {
@@ -30,7 +31,10 @@ namespace ItemSystem
             if (Input.GetKeyDown(toggleKey))
             {
                 if (flashlight != null)
+                {
+                    flashlightSound.Play();
                     flashlight.enabled = !flashlight.enabled;
+                }
             }
         }
 
@@ -39,7 +43,10 @@ namespace ItemSystem
             base.OnDropItem();
             isIntreactable = true;
             if (flashlight != null)
+            {
+                flashlightSound.Play();
                 flashlight.enabled = false;
+            }
         }
     }
 }

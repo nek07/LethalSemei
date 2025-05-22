@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Transports
@@ -17,12 +18,42 @@ namespace Transports
         [SerializeField] private WheelCollider[] driveWheels;
         [SerializeField] private WheelCollider[] steerWheels;
 
+        [Header("Wheel Transforms")] 
+        [SerializeField] private Transform[] wheelMeshes;
+        [SerializeField] private Transform[] driveWheelMeshes; // длина = driveWheels.Length
+
+
+        [Header("Drift FX")]
+        [SerializeField] private ParticleSystem[] driftParticles;
+        [SerializeField] private TrailRenderer[] tireSkidMarks;
+        [SerializeField] private float slipThreshold = 0.4f;
+
+        [Header("Audio")]
+        [SerializeField] private AudioSource engineSound;
+        [SerializeField] private float minPitch = 0.8f;
+        [SerializeField] private float maxPitch = 2f;
+        [SerializeField] private float pitchSpeedFactor = 0.02f;
+        
+        public bool finishedDriving = false;
         private int currentWaypointIndex = 0;
 
+        private Rigidbody rb;
+
+        private void Start()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
 
         void FixedUpdate()
         {
-            if (currentWaypointIndex >= waypoints.Count) return;
+            if (finishedDriving)
+                return;
+
+            if (currentWaypointIndex >= waypoints.Count)
+            {
+                StopVehicle();
+                return;
+            }
 
             Transform target = waypoints[currentWaypointIndex];
             Vector3 localTarget = transform.InverseTransformPoint(target.position);
@@ -30,9 +61,7 @@ namespace Transports
             float steerAngle = steer * maxSteerAngle;
 
             foreach (WheelCollider wheel in steerWheels)
-            {
                 wheel.steerAngle = steerAngle;
-            }
 
             float distance = Vector3.Distance(transform.position, target.position);
             bool shouldBrake = distance < 4f;
@@ -44,9 +73,105 @@ namespace Transports
             }
 
             if (distance < 4f)
-            {
                 currentWaypointIndex++;
+
+            
+            
+            UpdateWheelVisuals();
+            UpdateEngineSound();
+        }
+
+        private void UpdateWheelVisuals()
+        {
+            for (int i = 0; i < driveWheels.Length; i++)
+            {
+                WheelCollider wheel = driveWheels[i];
+                Vector3 pos;
+                Quaternion rot;
+                wheel.GetWorldPose(out pos, out rot);
+                if (i < wheelMeshes.Length)
+                {
+                    wheelMeshes[i].position = pos;
+                    wheelMeshes[i].rotation = rot;
+                }
             }
+            for (int i = 0; i < steerWheels.Length; i++)
+            {
+                WheelCollider collider = steerWheels[i];
+                Transform mesh = driveWheelMeshes[i];
+
+                Vector3 pos;
+                Quaternion rot;
+                collider.GetWorldPose(out pos, out rot);
+
+                mesh.position = pos;
+                mesh.rotation = rot;
+            }
+        }
+
+        
+
+        private void UpdateEngineSound()
+        {
+            if (engineSound == null || rb == null) return;
+
+            float speed = rb.velocity.magnitude;
+            engineSound.pitch = Mathf.Lerp(minPitch, maxPitch, speed * pitchSpeedFactor);
+        }
+
+        private void StopVehicle()
+        {
+            StartCoroutine(StopVehicleSmoothly());
+            finishedDriving = true;
+
+            if (rb != null)
+                rb.isKinematic = true;
+        }
+        private IEnumerator StopVehicleSmoothly()
+        {
+            float duration = 6f;
+            float elapsed = 0f;
+
+            Rigidbody rb = GetComponent<Rigidbody>();
+
+            // Запоминаем начальную скорость
+            Vector3 initialVelocity = rb.velocity;
+            float initialBrake = 0f;
+
+            while (elapsed < duration)
+            {
+                float t = elapsed / duration;
+
+                foreach (WheelCollider wheel in driveWheels)
+                {
+                    wheel.motorTorque = 0f;
+                    wheel.brakeTorque = Mathf.Lerp(initialBrake, brakeForce, t);
+                }
+
+                foreach (WheelCollider wheel in steerWheels)
+                {
+                    wheel.steerAngle = Mathf.Lerp(wheel.steerAngle, 0f, t);
+                }
+
+                // Можно вручную затухать скорость
+                rb.velocity = Vector3.Lerp(initialVelocity, Vector3.zero, t);
+
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            foreach (WheelCollider wheel in driveWheels)
+            {
+                wheel.motorTorque = 0f;
+                wheel.brakeTorque = brakeForce;
+            }
+
+            foreach (WheelCollider wheel in steerWheels)
+                wheel.steerAngle = 0f;
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
         }
     }
 }
