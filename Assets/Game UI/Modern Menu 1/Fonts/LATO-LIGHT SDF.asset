@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hashCode: 33077460
   material: {fileID: 21694689038030200}
-  materialHashCode: 769209204
+  materialHashCode: 105889503
   m_Version: 1.1.0
   m_SourceFontFileGUID: 0a3aa9b0a6d16d441a868dcb977951f5
   m_SourceFontFile_EditorRef: {fileID: 0}
@@ -30,7 +30,7 @@ MonoBehaviour:
     m_LineHeight: 86.40625
     m_AscentLine: 71.0625
     m_CapLine: 50.96875
-    m_MeanLine: 35.84375
+    m_MeanLine: 0
     m_Baseline: 0
     m_DescentLine: -15.34375
     m_SuperscriptOffset: 71.0625

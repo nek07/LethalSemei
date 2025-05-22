@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using Mirror;
 public class CharacterAnimController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private float locomotionBlendSpeed = 1f;
 
     private FirstPersonController firstPersonController;
+    private NetworkFirstPersonController networkFirstPersonController;
     private PlayerState playerState;
     private CharacterController characterController;
 
@@ -27,6 +28,7 @@ public class CharacterAnimController : MonoBehaviour
     private void Awake()
     {
         firstPersonController = GetComponent<FirstPersonController>();
+        networkFirstPersonController = GetComponent<NetworkFirstPersonController>();
         playerState = GetComponent<PlayerState>();
         characterController = GetComponent<CharacterController>();
     }
@@ -44,8 +46,16 @@ public class CharacterAnimController : MonoBehaviour
         bool isFalling = playerState.CurrentPlayerMovementState == PlayerMovementState.Falling;
         bool isGrounded = characterController.isGrounded;
         bool isSprinting = playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
+        Vector2 inputTarget;
+        if (GetComponent<NetworkIdentity>() != null)
+        {
+            inputTarget = networkFirstPersonController.PlayerInput;
+        }
+        else
+        {
+            inputTarget = firstPersonController.PlayerInput;
+        }
         
-        Vector2 inputTarget = firstPersonController.PlayerInput;
         currentBlendInput = Vector3.Lerp(currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
         
         animator.SetBool(isCrouchHash, isCrouching);
