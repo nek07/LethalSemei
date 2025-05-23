@@ -500,8 +500,8 @@ GameObject:
   - component: {fileID: -9199329279369785854}
   - component: {fileID: -5808689383878988146}
   m_Layer: 0
-  m_Name: Character V4
-  m_TagString: Untagged
+  m_Name: Character V4 1
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5190392068012011818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa7bdd61e4ed864798ccb4cab6c0671, type: 3}
   m_Name: 
@@ -736,6 +736,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 4306572128868939988}
   interactionDistance: 2
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 0
   interactionText: {fileID: 1319153939743337566}
 --- !u!114 &4008944435499784690
 MonoBehaviour:
@@ -776,6 +779,9 @@ MonoBehaviour:
   itemHolder: {fileID: 3513220989244231297}
   rightHand: {fileID: 725328063362382763}
   rightHandRig: {fileID: 1340254187764833171}
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 0
   throwKey: 103
   pickUpKey: 101
   pickUpDistance: 2
@@ -792,7 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 664452065
+  _assetId: 488687148
   serverOnly: 0
   visibility: 0
   hasSpawned: 0

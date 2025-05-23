@@ -23,6 +23,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Network stuff/floaded online.unity
     guid: 015c0b6325d6cac4ea148b7666a89fe9
+  - enabled: 1
+    path: Assets/Scenes/Network stuff/rake map.unity
+    guid: 1f91fdab389056e4d84505b6f5b1604e
+  - enabled: 1
+    path: Assets/Scenes/Test Damir/Market 1.unity
+    guid: 5eeb42ffdc73d09449f12aff3bcb966c
+  - enabled: 1
+    path: Assets/Flooded_Grounds/Scenes/Scene_A.unity
+    guid: c0d944ca9defd20449bc336e50d75a08
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9eb07e2d669e9c94e9d7d3c782a916f7,
       type: 2}
