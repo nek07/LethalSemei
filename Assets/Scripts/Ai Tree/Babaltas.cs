@@ -27,7 +27,7 @@ public class Babaltas : EnemyBase
 
     private void Update()
     {
-        
+        Debug.Log("Checking look...");
         rootNode.Evaluate();
     }
 }

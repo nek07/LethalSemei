@@ -525,6 +525,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1534960467080552017}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e8377572269f3a44ab34cdb16c5f30e1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6627513719406163100}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e8377572269f3a44ab34cdb16c5f30e1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8138593844955093089}
   m_SourcePrefab: {fileID: 100100000, guid: e8377572269f3a44ab34cdb16c5f30e1, type: 3}
 --- !u!95 &3981175135814381366 stripped
 Animator:
@@ -660,6 +668,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10241a5bb27f412dbc2c2a7d44d08e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   agent: {fileID: 0}
   animator: {fileID: 0}
   player: {fileID: 0}
@@ -675,3 +686,53 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 393207
+--- !u!114 &6627513719406163100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679769626512257014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 374513434
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &8138593844955093089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7679769626512257014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 7052590174939166028}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
