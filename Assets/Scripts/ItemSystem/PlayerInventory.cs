@@ -13,6 +13,7 @@ public class PlayerInventory : MonoBehaviour
     private int slotIndex = 0;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CharacterAnimController animController;
+    // [SerializeField] private NetworkCharacterAnimController networkCharacterAnimController;
     [SerializeField] private Transform itemHolder;
     [SerializeField] private GameObject rightHand;
     [SerializeField] private TwoBoneIKConstraint rightHandRig;

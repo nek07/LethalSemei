@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Mirror;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
@@ -53,7 +53,6 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuSceneName);
     }
 

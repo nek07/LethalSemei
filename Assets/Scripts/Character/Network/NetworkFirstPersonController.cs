@@ -79,6 +79,7 @@ public class NetworkFirstPersonController : NetworkBehaviour, IDieable
     private Vector3 moveDirection;
     private Vector2 currentInput;
     private float rotationX = 0;
+    private float rotationY = 0;
     private PlayerState playerState;
 
     private bool IsSliding
@@ -142,14 +143,45 @@ public class NetworkFirstPersonController : NetworkBehaviour, IDieable
         PlayerInput = currentInput;
     }
 
+
     private void HandleMouseLook()
     {
-        rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
-        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
-        headTarget.localPosition = Vector3.Slerp(headTarget.localPosition, new Vector3(0, rotationX / -15, 4f), Time.deltaTime * 50);
-        playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(rotationX, 0, 0), Time.deltaTime * 50);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
+        if (!isLocalPlayer) return; // Управляем только локальным игроком
+
+        // Чтение движения мыши
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Обновляем углы поворота камеры
+        rotationY += mouseX;
+        rotationX -= mouseY;
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+
+        // Поворот тела по горизонтали (влево/вправо)
+        transform.localRotation = Quaternion.Euler(0f, rotationY, 0f);
+
+        // Поворот камеры по вертикали (наклон вверх/вниз)
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+
+        // --- Улучшенное движение головы ---
+
+        // Плавное вращение головы:
+        // Наклон головы вверх/вниз чуть меньше, чтобы не дублировать камеру (делим rotationX на 2)
+        float headTiltX = rotationX / -2f;
+
+        // Поворот головы в стороны — берём движение мыши по X, умножаем на небольшую амплитуду
+        // Можно накапливать вращение, но здесь используем mouseX напрямую для быстрого отклика
+        float headTurnY = mouseX * 5f;
+
+        // Плавно интерполируем текущую локальную ротацию головы к нужной
+        Quaternion targetHeadRotation = Quaternion.Euler(headTiltX, headTurnY, 0f);
+        headTarget.localRotation = Quaternion.Slerp(
+            headTarget.localRotation,
+            targetHeadRotation,
+            Time.deltaTime * 10f // скорость сглаживания
+        );
     }
+
 
     private void ApplyFinalMovements()
     {
